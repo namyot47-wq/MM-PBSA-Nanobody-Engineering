@@ -1,0 +1,4 @@
+*.prmtop
+*.inpcrd
+*.out
+backup_pdbs/
