@@ -768,3 +768,2154 @@ Marking per-residue atom chain types.
 	Quit
 
 Exiting LEaP: Errors = 0; Warnings = 0; Notes = 0.
+log started: Wed Jul  8 14:49:30 2026
+
+Log file: ./leap.log
+>> #
+>> # ----- leaprc for loading the ff14SB force field
+>> # ----- NOTE: this is designed for PDB format 3!
+>> #
+>> #	load atom type hybridizations
+>> #
+>> addAtomTypes {
+>> 	{ "H"   "H" "sp3" }
+>> 	{ "HO"  "H" "sp3" }
+>> 	{ "HS"  "H" "sp3" }
+>> 	{ "H1"  "H" "sp3" }
+>> 	{ "H2"  "H" "sp3" }
+>> 	{ "H3"  "H" "sp3" }
+>> 	{ "H4"  "H" "sp3" }
+>> 	{ "H5"  "H" "sp3" }
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "HC"  "H" "sp3" }
+>> 	{ "HA"  "H" "sp3" }
+>> 	{ "HP"  "H" "sp3" }
+>> 	{ "HZ"  "H" "sp3" }
+>> 	{ "OH"  "O" "sp3" }
+>> 	{ "OS"  "O" "sp3" }
+>> 	{ "O"   "O" "sp2" }
+>> 	{ "O2"  "O" "sp2" }
+>> 	{ "OP"  "O" "sp2" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "CT"  "C" "sp3" }
+>> 	{ "CX"  "C" "sp3" }
+>> 	{ "C8"  "C" "sp3" }
+>> 	{ "2C"  "C" "sp3" }
+>> 	{ "3C"  "C" "sp3" }
+>> 	{ "CH"  "C" "sp3" }
+>> 	{ "CS"  "C" "sp2" }
+>> 	{ "C"   "C" "sp2" }
+>> 	{ "CO"   "C" "sp2" }
+>> 	{ "C*"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CB"  "C" "sp2" }
+>> 	{ "CC"  "C" "sp2" }
+>> 	{ "CN"  "C" "sp2" }
+>> 	{ "CM"  "C" "sp2" }
+>> 	{ "CK"  "C" "sp2" }
+>> 	{ "CQ"  "C" "sp2" }
+>> 	{ "CD"  "C" "sp2" }
+>> 	{ "C5"  "C" "sp2" }
+>> 	{ "C4"  "C" "sp2" }
+>> 	{ "CP"  "C" "sp2" }
+>> 	{ "CI"  "C" "sp3" }
+>> 	{ "CJ"  "C" "sp2" }
+>> 	{ "CW"  "C" "sp2" }
+>> 	{ "CV"  "C" "sp2" }
+>> 	{ "CR"  "C" "sp2" }
+>> 	{ "CA"  "C" "sp2" }
+>> 	{ "CY"  "C" "sp2" }
+>> 	{ "C0"  "Ca" "sp3" }
+>> 	{ "MG"  "Mg" "sp3" }
+>> 	{ "N"   "N" "sp2" }
+>> 	{ "NA"  "N" "sp2" }
+>> 	{ "N2"  "N" "sp2" }
+>> 	{ "N*"  "N" "sp2" }
+>> 	{ "NP"  "N" "sp2" }
+>> 	{ "NQ"  "N" "sp2" }
+>> 	{ "NB"  "N" "sp2" }
+>> 	{ "NC"  "N" "sp2" }
+>> 	{ "NT"  "N" "sp3" }
+>> 	{ "NY"  "N" "sp2" }
+>> 	{ "N3"  "N" "sp3" }
+>> 	{ "S"   "S" "sp3" }
+>> 	{ "SH"  "S" "sp3" }
+>> 	{ "P"   "P" "sp3" }
+>> 	{ "LP"  ""  "sp3" }
+>> 	{ "EP"  ""  "sp3" }
+>> 	{ "F"   "F" "sp3" }
+>> 	{ "Cl"  "Cl" "sp3" }
+>> 	{ "Br"  "Br" "sp3" }
+>> 	{ "I"   "I"  "sp3" }
+>> }
+>> #
+>> #	Load the main parameter set.
+>> #
+>> parm10 = loadamberparams parm10.dat
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+>> frcmod14SB = loadamberparams frcmod.ff14SB
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+>> #
+>> #	Load main chain and terminating amino acid libraries
+>> #
+>> loadOff amino12.lib
+Loading library: /opt/anaconda3/envs/amber_intel/dat/leap/lib/amino12.lib
+Loading: ALA
+Loading: ARG
+Loading: ASH
+Loading: ASN
+Loading: ASP
+Loading: CYM
+Loading: CYS
+Loading: CYX
+Loading: GLH
+Loading: GLN
+Loading: GLU
+Loading: GLY
+Loading: HID
+Loading: HIE
+Loading: HIP
+Loading: HYP
+Loading: ILE
+Loading: LEU
+Loading: LYN
+Loading: LYS
+Loading: MET
+Loading: PHE
+Loading: PRO
+Loading: SER
+Loading: THR
+Loading: TRP
+Loading: TYR
+Loading: VAL
+>> loadOff aminoct12.lib
+Loading library: /opt/anaconda3/envs/amber_intel/dat/leap/lib/aminoct12.lib
+Loading: CALA
+Loading: CARG
+Loading: CASN
+Loading: CASP
+Loading: CCYS
+Loading: CCYX
+Loading: CGLN
+Loading: CGLU
+Loading: CGLY
+Loading: CHID
+Loading: CHIE
+Loading: CHIP
+Loading: CHYP
+Loading: CILE
+Loading: CLEU
+Loading: CLYS
+Loading: CMET
+Loading: CPHE
+Loading: CPRO
+Loading: CSER
+Loading: CTHR
+Loading: CTRP
+Loading: CTYR
+Loading: CVAL
+Loading: NHE
+Loading: NME
+>> loadOff aminont12.lib
+Loading library: /opt/anaconda3/envs/amber_intel/dat/leap/lib/aminont12.lib
+Loading: ACE
+Loading: NALA
+Loading: NARG
+Loading: NASN
+Loading: NASP
+Loading: NCYS
+Loading: NCYX
+Loading: NGLN
+Loading: NGLU
+Loading: NGLY
+Loading: NHID
+Loading: NHIE
+Loading: NHIP
+Loading: NILE
+Loading: NLEU
+Loading: NLYS
+Loading: NMET
+Loading: NPHE
+Loading: NPRO
+Loading: NSER
+Loading: NTHR
+Loading: NTRP
+Loading: NTYR
+Loading: NVAL
+>> 
+>> #
+>> #	Define the PDB name map for the amino acids
+>> #
+>> addPdbResMap {
+>>   { 0 "HYP" "HYP" } { 1 "HYP" "CHYP" }
+>>   { 0 "ALA" "NALA" } { 1 "ALA" "CALA" }
+>>   { 0 "ARG" "NARG" } { 1 "ARG" "CARG" }
+>>   { 0 "ASN" "NASN" } { 1 "ASN" "CASN" }
+>>   { 0 "ASP" "NASP" } { 1 "ASP" "CASP" }
+>>   { 0 "CYS" "NCYS" } { 1 "CYS" "CCYS" }
+>>   { 0 "CYX" "NCYX" } { 1 "CYX" "CCYX" }
+>>   { 0 "GLN" "NGLN" } { 1 "GLN" "CGLN" }
+>>   { 0 "GLU" "NGLU" } { 1 "GLU" "CGLU" }
+>>   { 0 "GLY" "NGLY" } { 1 "GLY" "CGLY" }
+>>   { 0 "HID" "NHID" } { 1 "HID" "CHID" }
+>>   { 0 "HIE" "NHIE" } { 1 "HIE" "CHIE" }
+>>   { 0 "HIP" "NHIP" } { 1 "HIP" "CHIP" }
+>>   { 0 "ILE" "NILE" } { 1 "ILE" "CILE" }
+>>   { 0 "LEU" "NLEU" } { 1 "LEU" "CLEU" }
+>>   { 0 "LYS" "NLYS" } { 1 "LYS" "CLYS" }
+>>   { 0 "MET" "NMET" } { 1 "MET" "CMET" }
+>>   { 0 "PHE" "NPHE" } { 1 "PHE" "CPHE" }
+>>   { 0 "PRO" "NPRO" } { 1 "PRO" "CPRO" }
+>>   { 0 "SER" "NSER" } { 1 "SER" "CSER" }
+>>   { 0 "THR" "NTHR" } { 1 "THR" "CTHR" }
+>>   { 0 "TRP" "NTRP" } { 1 "TRP" "CTRP" }
+>>   { 0 "TYR" "NTYR" } { 1 "TYR" "CTYR" }
+>>   { 0 "VAL" "NVAL" } { 1 "VAL" "CVAL" }
+>>   { 0 "HIS" "NHIS" } { 1 "HIS" "CHIS" }
+>> }
+>> 
+>> #
+>> # assume that most often proteins use HIE
+>> #
+>> NHIS = NHIE
+>> HIS = HIE
+>> CHIS = CHIE
+> 
+> source leaprc.water.tip3p
+----- Source: /opt/anaconda3/envs/amber_intel/dat/leap/cmd/leaprc.water.tip3p
+----- Source of /opt/anaconda3/envs/amber_intel/dat/leap/cmd/leaprc.water.tip3p done
+>> #
+>> #       Load water and ions for TIP3P + Li/Merz monovalent ions 
+>> #       + Joung-Chetham monovalent ions
+>> #       + Li/Merz highly charged ions (+2 to +4, 12-6 normal usage set)
+>> #
+>> #       Note: the Li/Merz monovalent set is loaded only to get Tl+,
+>> #          Cu+, Ag+ NH4+, H3O+.  Since we load Joung-Cheatham second,
+>> #          the alkali halide parameters come from the Joung-Cheatham set
+>> #
+>> addAtomTypes {
+>> 	{ "HW"  "H" "sp3" }
+>> 	{ "OW"  "O" "sp3" }
+>> 	{ "F-"   "F" "sp3" }
+>> 	{ "Cl-"  "Cl" "sp3" }
+>> 	{ "Br-"  "Br" "sp3" }
+>> 	{ "I-"   "I"  "sp3" }
+>> 	{ "Li+"  "Li"  "sp3" }
+>> 	{ "Na+"  "Na"  "sp3" }
+>> 	{ "K+"  "K"  "sp3" }
+>> 	{ "Rb+"  "Rb"  "sp3" }
+>> 	{ "Cs+"  "Cs"  "sp3" }
+>> 	{ "Mg+"  "Mg"  "sp3" }
+>>     { "Tl+"  "Tl"  "sp3" }
+>>     { "Cu+"  "Cu"  "sp3" }
+>>     { "Ag+"  "Ag"  "sp3" }
+>>     { "NH4+"  "N"  "sp3" }
+>>     { "H3O+"  "O"  "sp3" }
+>>     { "Be2+" "Be"  "sp3" }
+>>     { "Cu2+" "Cu"  "sp3" }
+>>     { "Ni2+" "Ni"  "sp3" }
+>>     { "Pt2+" "Pt"  "sp3" }
+>>     { "Zn2+" "Zn"  "sp3" }
+>>     { "Co2+" "Co"  "sp3" }
+>>     { "Pd2+" "Pd"  "sp3" }
+>>     { "Ag2+" "Ag"  "sp3" }
+>>     { "Cr2+" "Cr"  "sp3" }
+>>     { "Fe2+" "Fe"  "sp3" }
+>>     { "Mg2+" "Mg"  "sp3" }
+>>     { "V2+"  "V"   "sp3" }
+>>     { "Mn2+" "Mn"  "sp3" }
+>>     { "Hg2+" "Hg"  "sp3" }
+>>     { "Cd2+" "Cd"  "sp3" }
+>>     { "Yb2+" "Yb"  "sp3" }
+>>     { "Ca2+" "Ca"  "sp3" }
+>>     { "Sn2+" "Sn"  "sp3" }
+>>     { "Pb2+" "Pb"  "sp3" }
+>>     { "Eu2+" "Eu"  "sp3" }
+>>     { "Sr2+" "Sr"  "sp3" }
+>>     { "Sm2+" "Sm"  "sp3" }
+>>     { "Ba2+" "Ba"  "sp3" }
+>>     { "Ra2+" "Ra"  "sp3" }
+>>     { "Al3+" "Al"  "sp3" }
+>>     { "Fe3+" "Fe"  "sp3" }
+>>     { "Cr3+" "Cr"  "sp3" }
+>>     { "In3+" "In"  "sp3" }
+>>     { "Tl3+" "Tl"  "sp3" }
+>>     { "Y3+"  "Y"   "sp3" }
+>>     { "La3+" "La"  "sp3" }
+>>     { "Ce3+" "Ce"  "sp3" }
+>>     { "Pr3+" "Pr"  "sp3" }
+>>     { "Nd3+" "Nd"  "sp3" }
+>>     { "Sm3+" "Sm"  "sp3" }
+>>     { "Eu3+" "Eu"  "sp3" }
+>>     { "Gd3+" "Gd"  "sp3" }
+>>     { "Tb3+" "Tb"  "sp3" }
+>>     { "Dy3+" "Dy"  "sp3" }
+>>     { "Er3+" "Er"  "sp3" }
+>>     { "Tm3+" "Tm"  "sp3" }
+>>     { "Lu3+" "Lu"  "sp3" }
+>>     { "Hf4+" "Hf"  "sp3" }
+>>     { "Zr4+" "Zr"  "sp3" }
+>>     { "Ce4+" "Ce"  "sp3" }
+>>     { "U4+"  "U"   "sp3" }
+>>     { "Pu4+" "Pu"  "sp3" }
+>>     { "Th4+" "Th"  "sp3" }
+>> }
+>> loadOff atomic_ions.lib
+Loading library: /opt/anaconda3/envs/amber_intel/dat/leap/lib/atomic_ions.lib
+Loading: AG
+Loading: AL
+Loading: Ag
+Loading: BA
+Loading: BR
+Loading: Be
+Loading: CA
+Loading: CD
+Loading: CE
+Loading: CL
+Loading: CO
+Loading: CR
+Loading: CS
+Loading: CU
+Loading: CU1
+Loading: Ce
+Loading: Cl-
+Loading: Cr
+Loading: Dy
+Loading: EU
+Loading: EU3
+Loading: Er
+Loading: F
+Loading: FE
+Loading: FE2
+Loading: GD3
+Loading: H3O+
+Loading: HE+
+Loading: HG
+Loading: HZ+
+Loading: Hf
+Loading: IN
+Loading: IOD
+Loading: K
+Loading: K+
+Loading: LA
+Loading: LI
+Loading: LU
+Loading: MG
+Loading: MN
+Loading: NA
+Loading: NH4
+Loading: NI
+Loading: Na+
+Loading: Nd
+Loading: PB
+Loading: PD
+Loading: PR
+Loading: PT
+Loading: Pu
+Loading: RB
+Loading: Ra
+Loading: SM
+Loading: SR
+Loading: Sm
+Loading: Sn
+Loading: TB
+Loading: TL
+Loading: Th
+Loading: Tl
+Loading: Tm
+Loading: U4+
+Loading: V2+
+Loading: Y
+Loading: YB2
+Loading: ZN
+Loading: Zr
+>> loadOff solvents.lib
+Loading library: /opt/anaconda3/envs/amber_intel/dat/leap/lib/solvents.lib
+Loading: CHCL3BOX
+Loading: DC4
+Loading: FB3
+Loading: FB3BOX
+Loading: FB4
+Loading: FB4BOX
+Loading: MEOHBOX
+Loading: NMABOX
+Loading: O3P
+Loading: OP3
+Loading: OPC
+Loading: OPC3BOX
+Loading: OPC3POLBOX
+Loading: OPCBOX
+Loading: PL3
+Loading: POL3BOX
+Loading: QSPCFWBOX
+Loading: SPC
+Loading: SPCBOX
+Loading: SPCFWBOX
+Loading: SPF
+Loading: SPG
+Loading: T4E
+Loading: TIP3PBOX
+Loading: TIP3PFBOX
+Loading: TIP4PBOX
+Loading: TIP4PEWBOX
+Loading: TIP5PBOX
+Loading: TP3
+Loading: TP4
+Loading: TP5
+Loading: TPF
+>> HOH = TP3
+>> WAT = TP3
+>> loadAmberParams frcmod.tip3p
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+>> loadAmberParams frcmod.ions1lm_126_tip3p
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+>> loadAmberParams frcmod.ionsjc_tip3p
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+>> loadAmberParams frcmod.ions234lm_126_tip3p
+Loading parameters: /opt/anaconda3/envs/amber_intel/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+>> 
+> 
+> 
+> # Load the three cleaned structures
+> com = loadpdb ras-raf_clean.pdb
+Loading PDB file: ./ras-raf_clean.pdb
+Matching PDB residue names to LEaP variables.
+Mapped residue MET, term: Terminal/beginning, seq. number: 0 to: NMET.
+Mapped residue HIP, term: Terminal/last, seq. number: 165 to: CHIP.
+Mapped residue ASN, term: Terminal/beginning, seq. number: 166 to: NASN.
+Mapped residue LEU, term: Terminal/last, seq. number: 241 to: CLEU.
+  total atoms in file: 3862
+> ras = loadpdb ras.pdb
+Loading PDB file: ./ras.pdb
+Matching PDB residue names to LEaP variables.
+Mapped residue MET, term: Terminal/beginning, seq. number: 0 to: NMET.
+Mapped residue LEU, term: Terminal/last, seq. number: 241 to: CLEU.
+Created a new atom named: OXT within residue: .R<HIP 166>
+Created a new atom named: H1 within residue: .R<ASN 167>
+Created a new atom named: H2 within residue: .R<ASN 167>
+Created a new atom named: H3 within residue: .R<ASN 167>
+  total atoms in file: 3862
+  Leap added 1 missing atom according to residue templates:
+       1 H / lone pairs
+  The file contained 4 atoms not in residue templates
+> raf = loadpdb raf.pdb
+Loading PDB file: ./raf.pdb
+Matching PDB residue names to LEaP variables.
+Mapped residue MET, term: Terminal/beginning, seq. number: 0 to: NMET.
+
+/opt/anaconda3/envs/amber_intel/bin/teLeap: Warning!
+Unknown residue: GTP   number: 227   type: Terminal/last
+..relaxing end constraints to try for a dbase match
+
+/opt/anaconda3/envs/amber_intel/bin/teLeap: Warning!
+  -no luck
+  Added missing heavy atom: .R<NMET 1>.A<CA 5>
+  Added missing heavy atom: .R<NMET 1>.A<CG 10>
+  Added missing heavy atom: .R<NMET 1>.A<N 1>
+  Added missing heavy atom: .R<NMET 1>.A<C 18>
+  Added missing heavy atom: .R<NMET 1>.A<SD 13>
+  Added missing heavy atom: .R<NMET 1>.A<O 19>
+  Added missing heavy atom: .R<NMET 1>.A<CE 14>
+  Added missing heavy atom: .R<THR 2>.A<CA 3>
+  Added missing heavy atom: .R<THR 2>.A<CG2 7>
+  Added missing heavy atom: .R<THR 2>.A<OG1 11>
+  Added missing heavy atom: .R<THR 2>.A<N 1>
+  Added missing heavy atom: .R<THR 2>.A<C 13>
+  Added missing heavy atom: .R<THR 2>.A<O 14>
+  Added missing heavy atom: .R<GLU 3>.A<CA 3>
+  Added missing heavy atom: .R<GLU 3>.A<CG 8>
+  Added missing heavy atom: .R<GLU 3>.A<N 1>
+  Added missing heavy atom: .R<GLU 3>.A<C 14>
+  Added missing heavy atom: .R<GLU 3>.A<CD 11>
+  Added missing heavy atom: .R<GLU 3>.A<O 15>
+  Added missing heavy atom: .R<GLU 3>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 3>.A<OE2 13>
+  Added missing heavy atom: .R<TYR 4>.A<CA 3>
+  Added missing heavy atom: .R<TYR 4>.A<CG 8>
+  Added missing heavy atom: .R<TYR 4>.A<N 1>
+  Added missing heavy atom: .R<TYR 4>.A<C 20>
+  Added missing heavy atom: .R<TYR 4>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 4>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 4>.A<O 21>
+  Added missing heavy atom: .R<TYR 4>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 4>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 4>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 4>.A<OH 14>
+  Added missing heavy atom: .R<LYS 5>.A<CA 3>
+  Added missing heavy atom: .R<LYS 5>.A<CG 8>
+  Added missing heavy atom: .R<LYS 5>.A<N 1>
+  Added missing heavy atom: .R<LYS 5>.A<C 21>
+  Added missing heavy atom: .R<LYS 5>.A<CD 11>
+  Added missing heavy atom: .R<LYS 5>.A<O 22>
+  Added missing heavy atom: .R<LYS 5>.A<CE 14>
+  Added missing heavy atom: .R<LYS 5>.A<NZ 17>
+  Added missing heavy atom: .R<LEU 6>.A<CA 3>
+  Added missing heavy atom: .R<LEU 6>.A<CG 8>
+  Added missing heavy atom: .R<LEU 6>.A<N 1>
+  Added missing heavy atom: .R<LEU 6>.A<C 18>
+  Added missing heavy atom: .R<LEU 6>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 6>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 6>.A<O 19>
+  Added missing heavy atom: .R<VAL 7>.A<CA 3>
+  Added missing heavy atom: .R<VAL 7>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 7>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 7>.A<N 1>
+  Added missing heavy atom: .R<VAL 7>.A<C 15>
+  Added missing heavy atom: .R<VAL 7>.A<O 16>
+  Added missing heavy atom: .R<VAL 8>.A<CA 3>
+  Added missing heavy atom: .R<VAL 8>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 8>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 8>.A<N 1>
+  Added missing heavy atom: .R<VAL 8>.A<C 15>
+  Added missing heavy atom: .R<VAL 8>.A<O 16>
+  Added missing heavy atom: .R<VAL 9>.A<CA 3>
+  Added missing heavy atom: .R<VAL 9>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 9>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 9>.A<N 1>
+  Added missing heavy atom: .R<VAL 9>.A<C 15>
+  Added missing heavy atom: .R<VAL 9>.A<O 16>
+  Added missing heavy atom: .R<ALA 10>.A<CA 3>
+  Added missing heavy atom: .R<ALA 10>.A<N 1>
+  Added missing heavy atom: .R<ALA 10>.A<C 9>
+  Added missing heavy atom: .R<ALA 10>.A<O 10>
+  Added missing heavy atom: .R<VAL 11>.A<CA 3>
+  Added missing heavy atom: .R<VAL 11>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 11>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 11>.A<N 1>
+  Added missing heavy atom: .R<VAL 11>.A<C 15>
+  Added missing heavy atom: .R<VAL 11>.A<O 16>
+  Added missing heavy atom: .R<LYS 12>.A<CA 3>
+  Added missing heavy atom: .R<LYS 12>.A<CG 8>
+  Added missing heavy atom: .R<LYS 12>.A<N 1>
+  Added missing heavy atom: .R<LYS 12>.A<C 21>
+  Added missing heavy atom: .R<LYS 12>.A<CD 11>
+  Added missing heavy atom: .R<LYS 12>.A<O 22>
+  Added missing heavy atom: .R<LYS 12>.A<CE 14>
+  Added missing heavy atom: .R<LYS 12>.A<NZ 17>
+  Added missing heavy atom: .R<SER 13>.A<CA 3>
+  Added missing heavy atom: .R<SER 13>.A<OG 8>
+  Added missing heavy atom: .R<SER 13>.A<N 1>
+  Added missing heavy atom: .R<SER 13>.A<C 10>
+  Added missing heavy atom: .R<SER 13>.A<O 11>
+  Added missing heavy atom: .R<ALA 14>.A<CA 3>
+  Added missing heavy atom: .R<ALA 14>.A<N 1>
+  Added missing heavy atom: .R<ALA 14>.A<C 9>
+  Added missing heavy atom: .R<ALA 14>.A<O 10>
+  Added missing heavy atom: .R<LEU 15>.A<CA 3>
+  Added missing heavy atom: .R<LEU 15>.A<CG 8>
+  Added missing heavy atom: .R<LEU 15>.A<N 1>
+  Added missing heavy atom: .R<LEU 15>.A<C 18>
+  Added missing heavy atom: .R<LEU 15>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 15>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 15>.A<O 19>
+  Added missing heavy atom: .R<THR 16>.A<CA 3>
+  Added missing heavy atom: .R<THR 16>.A<CG2 7>
+  Added missing heavy atom: .R<THR 16>.A<OG1 11>
+  Added missing heavy atom: .R<THR 16>.A<N 1>
+  Added missing heavy atom: .R<THR 16>.A<C 13>
+  Added missing heavy atom: .R<THR 16>.A<O 14>
+  Added missing heavy atom: .R<ILE 17>.A<CA 3>
+  Added missing heavy atom: .R<ILE 17>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 17>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 17>.A<N 1>
+  Added missing heavy atom: .R<ILE 17>.A<C 18>
+  Added missing heavy atom: .R<ILE 17>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 17>.A<O 19>
+  Added missing heavy atom: .R<GLN 18>.A<CA 3>
+  Added missing heavy atom: .R<GLN 18>.A<CG 8>
+  Added missing heavy atom: .R<GLN 18>.A<N 1>
+  Added missing heavy atom: .R<GLN 18>.A<C 16>
+  Added missing heavy atom: .R<GLN 18>.A<CD 11>
+  Added missing heavy atom: .R<GLN 18>.A<O 17>
+  Added missing heavy atom: .R<GLN 18>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 18>.A<NE2 13>
+  Added missing heavy atom: .R<LEU 19>.A<CA 3>
+  Added missing heavy atom: .R<LEU 19>.A<CG 8>
+  Added missing heavy atom: .R<LEU 19>.A<N 1>
+  Added missing heavy atom: .R<LEU 19>.A<C 18>
+  Added missing heavy atom: .R<LEU 19>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 19>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 19>.A<O 19>
+  Added missing heavy atom: .R<ILE 20>.A<CA 3>
+  Added missing heavy atom: .R<ILE 20>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 20>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 20>.A<N 1>
+  Added missing heavy atom: .R<ILE 20>.A<C 18>
+  Added missing heavy atom: .R<ILE 20>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 20>.A<O 19>
+  Added missing heavy atom: .R<GLN 21>.A<CA 3>
+  Added missing heavy atom: .R<GLN 21>.A<CG 8>
+  Added missing heavy atom: .R<GLN 21>.A<N 1>
+  Added missing heavy atom: .R<GLN 21>.A<C 16>
+  Added missing heavy atom: .R<GLN 21>.A<CD 11>
+  Added missing heavy atom: .R<GLN 21>.A<O 17>
+  Added missing heavy atom: .R<GLN 21>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 21>.A<NE2 13>
+  Added missing heavy atom: .R<ASN 22>.A<CA 3>
+  Added missing heavy atom: .R<ASN 22>.A<CG 8>
+  Added missing heavy atom: .R<ASN 22>.A<N 1>
+  Added missing heavy atom: .R<ASN 22>.A<C 13>
+  Added missing heavy atom: .R<ASN 22>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 22>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 22>.A<O 14>
+  Added missing heavy atom: .R<HIE 23>.A<CA 3>
+  Added missing heavy atom: .R<HIE 23>.A<CG 8>
+  Added missing heavy atom: .R<HIE 23>.A<N 1>
+  Added missing heavy atom: .R<HIE 23>.A<C 16>
+  Added missing heavy atom: .R<HIE 23>.A<ND1 9>
+  Added missing heavy atom: .R<HIE 23>.A<CD2 14>
+  Added missing heavy atom: .R<HIE 23>.A<O 17>
+  Added missing heavy atom: .R<HIE 23>.A<CE1 10>
+  Added missing heavy atom: .R<HIE 23>.A<NE2 12>
+  Added missing heavy atom: .R<PHE 24>.A<CA 3>
+  Added missing heavy atom: .R<PHE 24>.A<CG 8>
+  Added missing heavy atom: .R<PHE 24>.A<N 1>
+  Added missing heavy atom: .R<PHE 24>.A<C 19>
+  Added missing heavy atom: .R<PHE 24>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 24>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 24>.A<O 20>
+  Added missing heavy atom: .R<PHE 24>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 24>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 24>.A<CZ 13>
+  Added missing heavy atom: .R<VAL 25>.A<CA 3>
+  Added missing heavy atom: .R<VAL 25>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 25>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 25>.A<N 1>
+  Added missing heavy atom: .R<VAL 25>.A<C 15>
+  Added missing heavy atom: .R<VAL 25>.A<O 16>
+  Added missing heavy atom: .R<ASP 26>.A<CA 3>
+  Added missing heavy atom: .R<ASP 26>.A<CG 8>
+  Added missing heavy atom: .R<ASP 26>.A<N 1>
+  Added missing heavy atom: .R<ASP 26>.A<C 11>
+  Added missing heavy atom: .R<ASP 26>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 26>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 26>.A<O 12>
+  Added missing heavy atom: .R<GLU 27>.A<CA 3>
+  Added missing heavy atom: .R<GLU 27>.A<CG 8>
+  Added missing heavy atom: .R<GLU 27>.A<N 1>
+  Added missing heavy atom: .R<GLU 27>.A<C 14>
+  Added missing heavy atom: .R<GLU 27>.A<CD 11>
+  Added missing heavy atom: .R<GLU 27>.A<O 15>
+  Added missing heavy atom: .R<GLU 27>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 27>.A<OE2 13>
+  Added missing heavy atom: .R<TYR 28>.A<CA 3>
+  Added missing heavy atom: .R<TYR 28>.A<CG 8>
+  Added missing heavy atom: .R<TYR 28>.A<N 1>
+  Added missing heavy atom: .R<TYR 28>.A<C 20>
+  Added missing heavy atom: .R<TYR 28>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 28>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 28>.A<O 21>
+  Added missing heavy atom: .R<TYR 28>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 28>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 28>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 28>.A<OH 14>
+  Added missing heavy atom: .R<ASP 29>.A<CA 3>
+  Added missing heavy atom: .R<ASP 29>.A<CG 8>
+  Added missing heavy atom: .R<ASP 29>.A<N 1>
+  Added missing heavy atom: .R<ASP 29>.A<C 11>
+  Added missing heavy atom: .R<ASP 29>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 29>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 29>.A<O 12>
+  Added missing heavy atom: .R<PRO 30>.A<CG 5>
+  Added missing heavy atom: .R<PRO 30>.A<CA 11>
+  Added missing heavy atom: .R<PRO 30>.A<CD 2>
+  Added missing heavy atom: .R<PRO 30>.A<N 1>
+  Added missing heavy atom: .R<PRO 30>.A<C 13>
+  Added missing heavy atom: .R<PRO 30>.A<O 14>
+  Added missing heavy atom: .R<THR 31>.A<CA 3>
+  Added missing heavy atom: .R<THR 31>.A<CG2 7>
+  Added missing heavy atom: .R<THR 31>.A<OG1 11>
+  Added missing heavy atom: .R<THR 31>.A<N 1>
+  Added missing heavy atom: .R<THR 31>.A<C 13>
+  Added missing heavy atom: .R<THR 31>.A<O 14>
+  Added missing heavy atom: .R<ILE 32>.A<CA 3>
+  Added missing heavy atom: .R<ILE 32>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 32>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 32>.A<N 1>
+  Added missing heavy atom: .R<ILE 32>.A<C 18>
+  Added missing heavy atom: .R<ILE 32>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 32>.A<O 19>
+  Added missing heavy atom: .R<GLU 33>.A<CA 3>
+  Added missing heavy atom: .R<GLU 33>.A<CG 8>
+  Added missing heavy atom: .R<GLU 33>.A<N 1>
+  Added missing heavy atom: .R<GLU 33>.A<C 14>
+  Added missing heavy atom: .R<GLU 33>.A<CD 11>
+  Added missing heavy atom: .R<GLU 33>.A<O 15>
+  Added missing heavy atom: .R<GLU 33>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 33>.A<OE2 13>
+  Added missing heavy atom: .R<ASP 34>.A<CA 3>
+  Added missing heavy atom: .R<ASP 34>.A<CG 8>
+  Added missing heavy atom: .R<ASP 34>.A<N 1>
+  Added missing heavy atom: .R<ASP 34>.A<C 11>
+  Added missing heavy atom: .R<ASP 34>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 34>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 34>.A<O 12>
+  Added missing heavy atom: .R<SER 35>.A<CA 3>
+  Added missing heavy atom: .R<SER 35>.A<OG 8>
+  Added missing heavy atom: .R<SER 35>.A<N 1>
+  Added missing heavy atom: .R<SER 35>.A<C 10>
+  Added missing heavy atom: .R<SER 35>.A<O 11>
+  Added missing heavy atom: .R<TYR 36>.A<CA 3>
+  Added missing heavy atom: .R<TYR 36>.A<CG 8>
+  Added missing heavy atom: .R<TYR 36>.A<N 1>
+  Added missing heavy atom: .R<TYR 36>.A<C 20>
+  Added missing heavy atom: .R<TYR 36>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 36>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 36>.A<O 21>
+  Added missing heavy atom: .R<TYR 36>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 36>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 36>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 36>.A<OH 14>
+  Added missing heavy atom: .R<ARG 37>.A<CA 3>
+  Added missing heavy atom: .R<ARG 37>.A<CG 8>
+  Added missing heavy atom: .R<ARG 37>.A<N 1>
+  Added missing heavy atom: .R<ARG 37>.A<C 23>
+  Added missing heavy atom: .R<ARG 37>.A<CD 11>
+  Added missing heavy atom: .R<ARG 37>.A<O 24>
+  Added missing heavy atom: .R<ARG 37>.A<NE 14>
+  Added missing heavy atom: .R<ARG 37>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 37>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 37>.A<NH2 20>
+  Added missing heavy atom: .R<LYS 38>.A<CA 3>
+  Added missing heavy atom: .R<LYS 38>.A<CG 8>
+  Added missing heavy atom: .R<LYS 38>.A<N 1>
+  Added missing heavy atom: .R<LYS 38>.A<C 21>
+  Added missing heavy atom: .R<LYS 38>.A<CD 11>
+  Added missing heavy atom: .R<LYS 38>.A<O 22>
+  Added missing heavy atom: .R<LYS 38>.A<CE 14>
+  Added missing heavy atom: .R<LYS 38>.A<NZ 17>
+  Added missing heavy atom: .R<GLN 39>.A<CA 3>
+  Added missing heavy atom: .R<GLN 39>.A<CG 8>
+  Added missing heavy atom: .R<GLN 39>.A<N 1>
+  Added missing heavy atom: .R<GLN 39>.A<C 16>
+  Added missing heavy atom: .R<GLN 39>.A<CD 11>
+  Added missing heavy atom: .R<GLN 39>.A<O 17>
+  Added missing heavy atom: .R<GLN 39>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 39>.A<NE2 13>
+  Added missing heavy atom: .R<VAL 40>.A<CA 3>
+  Added missing heavy atom: .R<VAL 40>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 40>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 40>.A<N 1>
+  Added missing heavy atom: .R<VAL 40>.A<C 15>
+  Added missing heavy atom: .R<VAL 40>.A<O 16>
+  Added missing heavy atom: .R<VAL 41>.A<CA 3>
+  Added missing heavy atom: .R<VAL 41>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 41>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 41>.A<N 1>
+  Added missing heavy atom: .R<VAL 41>.A<C 15>
+  Added missing heavy atom: .R<VAL 41>.A<O 16>
+  Added missing heavy atom: .R<ILE 42>.A<CA 3>
+  Added missing heavy atom: .R<ILE 42>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 42>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 42>.A<N 1>
+  Added missing heavy atom: .R<ILE 42>.A<C 18>
+  Added missing heavy atom: .R<ILE 42>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 42>.A<O 19>
+  Added missing heavy atom: .R<ASP 43>.A<CA 3>
+  Added missing heavy atom: .R<ASP 43>.A<CG 8>
+  Added missing heavy atom: .R<ASP 43>.A<N 1>
+  Added missing heavy atom: .R<ASP 43>.A<C 11>
+  Added missing heavy atom: .R<ASP 43>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 43>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 43>.A<O 12>
+  Added missing heavy atom: .R<GLU 44>.A<CA 3>
+  Added missing heavy atom: .R<GLU 44>.A<CG 8>
+  Added missing heavy atom: .R<GLU 44>.A<N 1>
+  Added missing heavy atom: .R<GLU 44>.A<C 14>
+  Added missing heavy atom: .R<GLU 44>.A<CD 11>
+  Added missing heavy atom: .R<GLU 44>.A<O 15>
+  Added missing heavy atom: .R<GLU 44>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 44>.A<OE2 13>
+  Added missing heavy atom: .R<THR 45>.A<CA 3>
+  Added missing heavy atom: .R<THR 45>.A<CG2 7>
+  Added missing heavy atom: .R<THR 45>.A<OG1 11>
+  Added missing heavy atom: .R<THR 45>.A<N 1>
+  Added missing heavy atom: .R<THR 45>.A<C 13>
+  Added missing heavy atom: .R<THR 45>.A<O 14>
+  Added missing heavy atom: .R<CYS 46>.A<CA 3>
+  Added missing heavy atom: .R<CYS 46>.A<SG 8>
+  Added missing heavy atom: .R<CYS 46>.A<N 1>
+  Added missing heavy atom: .R<CYS 46>.A<C 10>
+  Added missing heavy atom: .R<CYS 46>.A<O 11>
+  Added missing heavy atom: .R<LEU 47>.A<CA 3>
+  Added missing heavy atom: .R<LEU 47>.A<CG 8>
+  Added missing heavy atom: .R<LEU 47>.A<N 1>
+  Added missing heavy atom: .R<LEU 47>.A<C 18>
+  Added missing heavy atom: .R<LEU 47>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 47>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 47>.A<O 19>
+  Added missing heavy atom: .R<LEU 48>.A<CA 3>
+  Added missing heavy atom: .R<LEU 48>.A<CG 8>
+  Added missing heavy atom: .R<LEU 48>.A<N 1>
+  Added missing heavy atom: .R<LEU 48>.A<C 18>
+  Added missing heavy atom: .R<LEU 48>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 48>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 48>.A<O 19>
+  Added missing heavy atom: .R<ASP 49>.A<CA 3>
+  Added missing heavy atom: .R<ASP 49>.A<CG 8>
+  Added missing heavy atom: .R<ASP 49>.A<N 1>
+  Added missing heavy atom: .R<ASP 49>.A<C 11>
+  Added missing heavy atom: .R<ASP 49>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 49>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 49>.A<O 12>
+  Added missing heavy atom: .R<ILE 50>.A<CA 3>
+  Added missing heavy atom: .R<ILE 50>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 50>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 50>.A<N 1>
+  Added missing heavy atom: .R<ILE 50>.A<C 18>
+  Added missing heavy atom: .R<ILE 50>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 50>.A<O 19>
+  Added missing heavy atom: .R<LEU 51>.A<CA 3>
+  Added missing heavy atom: .R<LEU 51>.A<CG 8>
+  Added missing heavy atom: .R<LEU 51>.A<N 1>
+  Added missing heavy atom: .R<LEU 51>.A<C 18>
+  Added missing heavy atom: .R<LEU 51>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 51>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 51>.A<O 19>
+  Added missing heavy atom: .R<ASP 52>.A<CA 3>
+  Added missing heavy atom: .R<ASP 52>.A<CG 8>
+  Added missing heavy atom: .R<ASP 52>.A<N 1>
+  Added missing heavy atom: .R<ASP 52>.A<C 11>
+  Added missing heavy atom: .R<ASP 52>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 52>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 52>.A<O 12>
+  Added missing heavy atom: .R<THR 53>.A<CA 3>
+  Added missing heavy atom: .R<THR 53>.A<CG2 7>
+  Added missing heavy atom: .R<THR 53>.A<OG1 11>
+  Added missing heavy atom: .R<THR 53>.A<N 1>
+  Added missing heavy atom: .R<THR 53>.A<C 13>
+  Added missing heavy atom: .R<THR 53>.A<O 14>
+  Added missing heavy atom: .R<ALA 54>.A<CA 3>
+  Added missing heavy atom: .R<ALA 54>.A<N 1>
+  Added missing heavy atom: .R<ALA 54>.A<C 9>
+  Added missing heavy atom: .R<ALA 54>.A<O 10>
+  Added missing heavy atom: .R<GLN 55>.A<CA 3>
+  Added missing heavy atom: .R<GLN 55>.A<CG 8>
+  Added missing heavy atom: .R<GLN 55>.A<N 1>
+  Added missing heavy atom: .R<GLN 55>.A<C 16>
+  Added missing heavy atom: .R<GLN 55>.A<CD 11>
+  Added missing heavy atom: .R<GLN 55>.A<O 17>
+  Added missing heavy atom: .R<GLN 55>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 55>.A<NE2 13>
+  Added missing heavy atom: .R<GLU 56>.A<CA 3>
+  Added missing heavy atom: .R<GLU 56>.A<CG 8>
+  Added missing heavy atom: .R<GLU 56>.A<N 1>
+  Added missing heavy atom: .R<GLU 56>.A<C 14>
+  Added missing heavy atom: .R<GLU 56>.A<CD 11>
+  Added missing heavy atom: .R<GLU 56>.A<O 15>
+  Added missing heavy atom: .R<GLU 56>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 56>.A<OE2 13>
+  Added missing heavy atom: .R<GLU 57>.A<CA 3>
+  Added missing heavy atom: .R<GLU 57>.A<CG 8>
+  Added missing heavy atom: .R<GLU 57>.A<N 1>
+  Added missing heavy atom: .R<GLU 57>.A<C 14>
+  Added missing heavy atom: .R<GLU 57>.A<CD 11>
+  Added missing heavy atom: .R<GLU 57>.A<O 15>
+  Added missing heavy atom: .R<GLU 57>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 57>.A<OE2 13>
+  Added missing heavy atom: .R<TYR 58>.A<CA 3>
+  Added missing heavy atom: .R<TYR 58>.A<CG 8>
+  Added missing heavy atom: .R<TYR 58>.A<N 1>
+  Added missing heavy atom: .R<TYR 58>.A<C 20>
+  Added missing heavy atom: .R<TYR 58>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 58>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 58>.A<O 21>
+  Added missing heavy atom: .R<TYR 58>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 58>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 58>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 58>.A<OH 14>
+  Added missing heavy atom: .R<SER 59>.A<CA 3>
+  Added missing heavy atom: .R<SER 59>.A<OG 8>
+  Added missing heavy atom: .R<SER 59>.A<N 1>
+  Added missing heavy atom: .R<SER 59>.A<C 10>
+  Added missing heavy atom: .R<SER 59>.A<O 11>
+  Added missing heavy atom: .R<ALA 60>.A<CA 3>
+  Added missing heavy atom: .R<ALA 60>.A<N 1>
+  Added missing heavy atom: .R<ALA 60>.A<C 9>
+  Added missing heavy atom: .R<ALA 60>.A<O 10>
+  Added missing heavy atom: .R<MET 61>.A<CA 3>
+  Added missing heavy atom: .R<MET 61>.A<CG 8>
+  Added missing heavy atom: .R<MET 61>.A<N 1>
+  Added missing heavy atom: .R<MET 61>.A<C 16>
+  Added missing heavy atom: .R<MET 61>.A<SD 11>
+  Added missing heavy atom: .R<MET 61>.A<O 17>
+  Added missing heavy atom: .R<MET 61>.A<CE 12>
+  Added missing heavy atom: .R<ARG 62>.A<CA 3>
+  Added missing heavy atom: .R<ARG 62>.A<CG 8>
+  Added missing heavy atom: .R<ARG 62>.A<N 1>
+  Added missing heavy atom: .R<ARG 62>.A<C 23>
+  Added missing heavy atom: .R<ARG 62>.A<CD 11>
+  Added missing heavy atom: .R<ARG 62>.A<O 24>
+  Added missing heavy atom: .R<ARG 62>.A<NE 14>
+  Added missing heavy atom: .R<ARG 62>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 62>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 62>.A<NH2 20>
+  Added missing heavy atom: .R<ASP 63>.A<CA 3>
+  Added missing heavy atom: .R<ASP 63>.A<CG 8>
+  Added missing heavy atom: .R<ASP 63>.A<N 1>
+  Added missing heavy atom: .R<ASP 63>.A<C 11>
+  Added missing heavy atom: .R<ASP 63>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 63>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 63>.A<O 12>
+  Added missing heavy atom: .R<GLN 64>.A<CA 3>
+  Added missing heavy atom: .R<GLN 64>.A<CG 8>
+  Added missing heavy atom: .R<GLN 64>.A<N 1>
+  Added missing heavy atom: .R<GLN 64>.A<C 16>
+  Added missing heavy atom: .R<GLN 64>.A<CD 11>
+  Added missing heavy atom: .R<GLN 64>.A<O 17>
+  Added missing heavy atom: .R<GLN 64>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 64>.A<NE2 13>
+  Added missing heavy atom: .R<TYR 65>.A<CA 3>
+  Added missing heavy atom: .R<TYR 65>.A<CG 8>
+  Added missing heavy atom: .R<TYR 65>.A<N 1>
+  Added missing heavy atom: .R<TYR 65>.A<C 20>
+  Added missing heavy atom: .R<TYR 65>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 65>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 65>.A<O 21>
+  Added missing heavy atom: .R<TYR 65>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 65>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 65>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 65>.A<OH 14>
+  Added missing heavy atom: .R<MET 66>.A<CA 3>
+  Added missing heavy atom: .R<MET 66>.A<CG 8>
+  Added missing heavy atom: .R<MET 66>.A<N 1>
+  Added missing heavy atom: .R<MET 66>.A<C 16>
+  Added missing heavy atom: .R<MET 66>.A<SD 11>
+  Added missing heavy atom: .R<MET 66>.A<O 17>
+  Added missing heavy atom: .R<MET 66>.A<CE 12>
+  Added missing heavy atom: .R<ARG 67>.A<CA 3>
+  Added missing heavy atom: .R<ARG 67>.A<CG 8>
+  Added missing heavy atom: .R<ARG 67>.A<N 1>
+  Added missing heavy atom: .R<ARG 67>.A<C 23>
+  Added missing heavy atom: .R<ARG 67>.A<CD 11>
+  Added missing heavy atom: .R<ARG 67>.A<O 24>
+  Added missing heavy atom: .R<ARG 67>.A<NE 14>
+  Added missing heavy atom: .R<ARG 67>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 67>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 67>.A<NH2 20>
+  Added missing heavy atom: .R<THR 68>.A<CA 3>
+  Added missing heavy atom: .R<THR 68>.A<CG2 7>
+  Added missing heavy atom: .R<THR 68>.A<OG1 11>
+  Added missing heavy atom: .R<THR 68>.A<N 1>
+  Added missing heavy atom: .R<THR 68>.A<C 13>
+  Added missing heavy atom: .R<THR 68>.A<O 14>
+  Added missing heavy atom: .R<GLU 69>.A<CA 3>
+  Added missing heavy atom: .R<GLU 69>.A<CG 8>
+  Added missing heavy atom: .R<GLU 69>.A<N 1>
+  Added missing heavy atom: .R<GLU 69>.A<C 14>
+  Added missing heavy atom: .R<GLU 69>.A<CD 11>
+  Added missing heavy atom: .R<GLU 69>.A<O 15>
+  Added missing heavy atom: .R<GLU 69>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 69>.A<OE2 13>
+  Added missing heavy atom: .R<PHE 70>.A<CA 3>
+  Added missing heavy atom: .R<PHE 70>.A<CG 8>
+  Added missing heavy atom: .R<PHE 70>.A<N 1>
+  Added missing heavy atom: .R<PHE 70>.A<C 19>
+  Added missing heavy atom: .R<PHE 70>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 70>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 70>.A<O 20>
+  Added missing heavy atom: .R<PHE 70>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 70>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 70>.A<CZ 13>
+  Added missing heavy atom: .R<LEU 71>.A<CA 3>
+  Added missing heavy atom: .R<LEU 71>.A<CG 8>
+  Added missing heavy atom: .R<LEU 71>.A<N 1>
+  Added missing heavy atom: .R<LEU 71>.A<C 18>
+  Added missing heavy atom: .R<LEU 71>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 71>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 71>.A<O 19>
+  Added missing heavy atom: .R<CYS 72>.A<CA 3>
+  Added missing heavy atom: .R<CYS 72>.A<SG 8>
+  Added missing heavy atom: .R<CYS 72>.A<N 1>
+  Added missing heavy atom: .R<CYS 72>.A<C 10>
+  Added missing heavy atom: .R<CYS 72>.A<O 11>
+  Added missing heavy atom: .R<VAL 73>.A<CA 3>
+  Added missing heavy atom: .R<VAL 73>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 73>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 73>.A<N 1>
+  Added missing heavy atom: .R<VAL 73>.A<C 15>
+  Added missing heavy atom: .R<VAL 73>.A<O 16>
+  Added missing heavy atom: .R<PHE 74>.A<CA 3>
+  Added missing heavy atom: .R<PHE 74>.A<CG 8>
+  Added missing heavy atom: .R<PHE 74>.A<N 1>
+  Added missing heavy atom: .R<PHE 74>.A<C 19>
+  Added missing heavy atom: .R<PHE 74>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 74>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 74>.A<O 20>
+  Added missing heavy atom: .R<PHE 74>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 74>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 74>.A<CZ 13>
+  Added missing heavy atom: .R<ALA 75>.A<CA 3>
+  Added missing heavy atom: .R<ALA 75>.A<N 1>
+  Added missing heavy atom: .R<ALA 75>.A<C 9>
+  Added missing heavy atom: .R<ALA 75>.A<O 10>
+  Added missing heavy atom: .R<ILE 76>.A<CA 3>
+  Added missing heavy atom: .R<ILE 76>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 76>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 76>.A<N 1>
+  Added missing heavy atom: .R<ILE 76>.A<C 18>
+  Added missing heavy atom: .R<ILE 76>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 76>.A<O 19>
+  Added missing heavy atom: .R<ASN 77>.A<CA 3>
+  Added missing heavy atom: .R<ASN 77>.A<CG 8>
+  Added missing heavy atom: .R<ASN 77>.A<N 1>
+  Added missing heavy atom: .R<ASN 77>.A<C 13>
+  Added missing heavy atom: .R<ASN 77>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 77>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 77>.A<O 14>
+  Added missing heavy atom: .R<ASN 78>.A<CA 3>
+  Added missing heavy atom: .R<ASN 78>.A<CG 8>
+  Added missing heavy atom: .R<ASN 78>.A<N 1>
+  Added missing heavy atom: .R<ASN 78>.A<C 13>
+  Added missing heavy atom: .R<ASN 78>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 78>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 78>.A<O 14>
+  Added missing heavy atom: .R<THR 79>.A<CA 3>
+  Added missing heavy atom: .R<THR 79>.A<CG2 7>
+  Added missing heavy atom: .R<THR 79>.A<OG1 11>
+  Added missing heavy atom: .R<THR 79>.A<N 1>
+  Added missing heavy atom: .R<THR 79>.A<C 13>
+  Added missing heavy atom: .R<THR 79>.A<O 14>
+  Added missing heavy atom: .R<LYS 80>.A<CA 3>
+  Added missing heavy atom: .R<LYS 80>.A<CG 8>
+  Added missing heavy atom: .R<LYS 80>.A<N 1>
+  Added missing heavy atom: .R<LYS 80>.A<C 21>
+  Added missing heavy atom: .R<LYS 80>.A<CD 11>
+  Added missing heavy atom: .R<LYS 80>.A<O 22>
+  Added missing heavy atom: .R<LYS 80>.A<CE 14>
+  Added missing heavy atom: .R<LYS 80>.A<NZ 17>
+  Added missing heavy atom: .R<SER 81>.A<CA 3>
+  Added missing heavy atom: .R<SER 81>.A<OG 8>
+  Added missing heavy atom: .R<SER 81>.A<N 1>
+  Added missing heavy atom: .R<SER 81>.A<C 10>
+  Added missing heavy atom: .R<SER 81>.A<O 11>
+  Added missing heavy atom: .R<PHE 82>.A<CA 3>
+  Added missing heavy atom: .R<PHE 82>.A<CG 8>
+  Added missing heavy atom: .R<PHE 82>.A<N 1>
+  Added missing heavy atom: .R<PHE 82>.A<C 19>
+  Added missing heavy atom: .R<PHE 82>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 82>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 82>.A<O 20>
+  Added missing heavy atom: .R<PHE 82>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 82>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 82>.A<CZ 13>
+  Added missing heavy atom: .R<GLU 83>.A<CA 3>
+  Added missing heavy atom: .R<GLU 83>.A<CG 8>
+  Added missing heavy atom: .R<GLU 83>.A<N 1>
+  Added missing heavy atom: .R<GLU 83>.A<C 14>
+  Added missing heavy atom: .R<GLU 83>.A<CD 11>
+  Added missing heavy atom: .R<GLU 83>.A<O 15>
+  Added missing heavy atom: .R<GLU 83>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 83>.A<OE2 13>
+  Added missing heavy atom: .R<ASP 84>.A<CA 3>
+  Added missing heavy atom: .R<ASP 84>.A<CG 8>
+  Added missing heavy atom: .R<ASP 84>.A<N 1>
+  Added missing heavy atom: .R<ASP 84>.A<C 11>
+  Added missing heavy atom: .R<ASP 84>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 84>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 84>.A<O 12>
+  Added missing heavy atom: .R<ILE 85>.A<CA 3>
+  Added missing heavy atom: .R<ILE 85>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 85>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 85>.A<N 1>
+  Added missing heavy atom: .R<ILE 85>.A<C 18>
+  Added missing heavy atom: .R<ILE 85>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 85>.A<O 19>
+  Added missing heavy atom: .R<HIP 86>.A<CA 3>
+  Added missing heavy atom: .R<HIP 86>.A<CG 8>
+  Added missing heavy atom: .R<HIP 86>.A<N 1>
+  Added missing heavy atom: .R<HIP 86>.A<C 17>
+  Added missing heavy atom: .R<HIP 86>.A<ND1 9>
+  Added missing heavy atom: .R<HIP 86>.A<CD2 15>
+  Added missing heavy atom: .R<HIP 86>.A<O 18>
+  Added missing heavy atom: .R<HIP 86>.A<CE1 11>
+  Added missing heavy atom: .R<HIP 86>.A<NE2 13>
+  Added missing heavy atom: .R<GLN 87>.A<CA 3>
+  Added missing heavy atom: .R<GLN 87>.A<CG 8>
+  Added missing heavy atom: .R<GLN 87>.A<N 1>
+  Added missing heavy atom: .R<GLN 87>.A<C 16>
+  Added missing heavy atom: .R<GLN 87>.A<CD 11>
+  Added missing heavy atom: .R<GLN 87>.A<O 17>
+  Added missing heavy atom: .R<GLN 87>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 87>.A<NE2 13>
+  Added missing heavy atom: .R<TYR 88>.A<CA 3>
+  Added missing heavy atom: .R<TYR 88>.A<CG 8>
+  Added missing heavy atom: .R<TYR 88>.A<N 1>
+  Added missing heavy atom: .R<TYR 88>.A<C 20>
+  Added missing heavy atom: .R<TYR 88>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 88>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 88>.A<O 21>
+  Added missing heavy atom: .R<TYR 88>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 88>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 88>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 88>.A<OH 14>
+  Added missing heavy atom: .R<ARG 89>.A<CA 3>
+  Added missing heavy atom: .R<ARG 89>.A<CG 8>
+  Added missing heavy atom: .R<ARG 89>.A<N 1>
+  Added missing heavy atom: .R<ARG 89>.A<C 23>
+  Added missing heavy atom: .R<ARG 89>.A<CD 11>
+  Added missing heavy atom: .R<ARG 89>.A<O 24>
+  Added missing heavy atom: .R<ARG 89>.A<NE 14>
+  Added missing heavy atom: .R<ARG 89>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 89>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 89>.A<NH2 20>
+  Added missing heavy atom: .R<GLU 90>.A<CA 3>
+  Added missing heavy atom: .R<GLU 90>.A<CG 8>
+  Added missing heavy atom: .R<GLU 90>.A<N 1>
+  Added missing heavy atom: .R<GLU 90>.A<C 14>
+  Added missing heavy atom: .R<GLU 90>.A<CD 11>
+  Added missing heavy atom: .R<GLU 90>.A<O 15>
+  Added missing heavy atom: .R<GLU 90>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 90>.A<OE2 13>
+  Added missing heavy atom: .R<GLN 91>.A<CA 3>
+  Added missing heavy atom: .R<GLN 91>.A<CG 8>
+  Added missing heavy atom: .R<GLN 91>.A<N 1>
+  Added missing heavy atom: .R<GLN 91>.A<C 16>
+  Added missing heavy atom: .R<GLN 91>.A<CD 11>
+  Added missing heavy atom: .R<GLN 91>.A<O 17>
+  Added missing heavy atom: .R<GLN 91>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 91>.A<NE2 13>
+  Added missing heavy atom: .R<ILE 92>.A<CA 3>
+  Added missing heavy atom: .R<ILE 92>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 92>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 92>.A<N 1>
+  Added missing heavy atom: .R<ILE 92>.A<C 18>
+  Added missing heavy atom: .R<ILE 92>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 92>.A<O 19>
+  Added missing heavy atom: .R<LYS 93>.A<CA 3>
+  Added missing heavy atom: .R<LYS 93>.A<CG 8>
+  Added missing heavy atom: .R<LYS 93>.A<N 1>
+  Added missing heavy atom: .R<LYS 93>.A<C 21>
+  Added missing heavy atom: .R<LYS 93>.A<CD 11>
+  Added missing heavy atom: .R<LYS 93>.A<O 22>
+  Added missing heavy atom: .R<LYS 93>.A<CE 14>
+  Added missing heavy atom: .R<LYS 93>.A<NZ 17>
+  Added missing heavy atom: .R<ARG 94>.A<CA 3>
+  Added missing heavy atom: .R<ARG 94>.A<CG 8>
+  Added missing heavy atom: .R<ARG 94>.A<N 1>
+  Added missing heavy atom: .R<ARG 94>.A<C 23>
+  Added missing heavy atom: .R<ARG 94>.A<CD 11>
+  Added missing heavy atom: .R<ARG 94>.A<O 24>
+  Added missing heavy atom: .R<ARG 94>.A<NE 14>
+  Added missing heavy atom: .R<ARG 94>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 94>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 94>.A<NH2 20>
+  Added missing heavy atom: .R<VAL 95>.A<CA 3>
+  Added missing heavy atom: .R<VAL 95>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 95>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 95>.A<N 1>
+  Added missing heavy atom: .R<VAL 95>.A<C 15>
+  Added missing heavy atom: .R<VAL 95>.A<O 16>
+  Added missing heavy atom: .R<LYS 96>.A<CA 3>
+  Added missing heavy atom: .R<LYS 96>.A<CG 8>
+  Added missing heavy atom: .R<LYS 96>.A<N 1>
+  Added missing heavy atom: .R<LYS 96>.A<C 21>
+  Added missing heavy atom: .R<LYS 96>.A<CD 11>
+  Added missing heavy atom: .R<LYS 96>.A<O 22>
+  Added missing heavy atom: .R<LYS 96>.A<CE 14>
+  Added missing heavy atom: .R<LYS 96>.A<NZ 17>
+  Added missing heavy atom: .R<ASP 97>.A<CA 3>
+  Added missing heavy atom: .R<ASP 97>.A<CG 8>
+  Added missing heavy atom: .R<ASP 97>.A<N 1>
+  Added missing heavy atom: .R<ASP 97>.A<C 11>
+  Added missing heavy atom: .R<ASP 97>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 97>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 97>.A<O 12>
+  Added missing heavy atom: .R<SER 98>.A<CA 3>
+  Added missing heavy atom: .R<SER 98>.A<OG 8>
+  Added missing heavy atom: .R<SER 98>.A<N 1>
+  Added missing heavy atom: .R<SER 98>.A<C 10>
+  Added missing heavy atom: .R<SER 98>.A<O 11>
+  Added missing heavy atom: .R<ASP 99>.A<CA 3>
+  Added missing heavy atom: .R<ASP 99>.A<CG 8>
+  Added missing heavy atom: .R<ASP 99>.A<N 1>
+  Added missing heavy atom: .R<ASP 99>.A<C 11>
+  Added missing heavy atom: .R<ASP 99>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 99>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 99>.A<O 12>
+  Added missing heavy atom: .R<ASP 100>.A<CA 3>
+  Added missing heavy atom: .R<ASP 100>.A<CG 8>
+  Added missing heavy atom: .R<ASP 100>.A<N 1>
+  Added missing heavy atom: .R<ASP 100>.A<C 11>
+  Added missing heavy atom: .R<ASP 100>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 100>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 100>.A<O 12>
+  Added missing heavy atom: .R<VAL 101>.A<CA 3>
+  Added missing heavy atom: .R<VAL 101>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 101>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 101>.A<N 1>
+  Added missing heavy atom: .R<VAL 101>.A<C 15>
+  Added missing heavy atom: .R<VAL 101>.A<O 16>
+  Added missing heavy atom: .R<PRO 102>.A<CG 5>
+  Added missing heavy atom: .R<PRO 102>.A<CA 11>
+  Added missing heavy atom: .R<PRO 102>.A<CD 2>
+  Added missing heavy atom: .R<PRO 102>.A<N 1>
+  Added missing heavy atom: .R<PRO 102>.A<C 13>
+  Added missing heavy atom: .R<PRO 102>.A<O 14>
+  Added missing heavy atom: .R<MET 103>.A<CA 3>
+  Added missing heavy atom: .R<MET 103>.A<CG 8>
+  Added missing heavy atom: .R<MET 103>.A<N 1>
+  Added missing heavy atom: .R<MET 103>.A<C 16>
+  Added missing heavy atom: .R<MET 103>.A<SD 11>
+  Added missing heavy atom: .R<MET 103>.A<O 17>
+  Added missing heavy atom: .R<MET 103>.A<CE 12>
+  Added missing heavy atom: .R<VAL 104>.A<CA 3>
+  Added missing heavy atom: .R<VAL 104>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 104>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 104>.A<N 1>
+  Added missing heavy atom: .R<VAL 104>.A<C 15>
+  Added missing heavy atom: .R<VAL 104>.A<O 16>
+  Added missing heavy atom: .R<LEU 105>.A<CA 3>
+  Added missing heavy atom: .R<LEU 105>.A<CG 8>
+  Added missing heavy atom: .R<LEU 105>.A<N 1>
+  Added missing heavy atom: .R<LEU 105>.A<C 18>
+  Added missing heavy atom: .R<LEU 105>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 105>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 105>.A<O 19>
+  Added missing heavy atom: .R<VAL 106>.A<CA 3>
+  Added missing heavy atom: .R<VAL 106>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 106>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 106>.A<N 1>
+  Added missing heavy atom: .R<VAL 106>.A<C 15>
+  Added missing heavy atom: .R<VAL 106>.A<O 16>
+  Added missing heavy atom: .R<ASN 107>.A<CA 3>
+  Added missing heavy atom: .R<ASN 107>.A<CG 8>
+  Added missing heavy atom: .R<ASN 107>.A<N 1>
+  Added missing heavy atom: .R<ASN 107>.A<C 13>
+  Added missing heavy atom: .R<ASN 107>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 107>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 107>.A<O 14>
+  Added missing heavy atom: .R<LYS 108>.A<CA 3>
+  Added missing heavy atom: .R<LYS 108>.A<CG 8>
+  Added missing heavy atom: .R<LYS 108>.A<N 1>
+  Added missing heavy atom: .R<LYS 108>.A<C 21>
+  Added missing heavy atom: .R<LYS 108>.A<CD 11>
+  Added missing heavy atom: .R<LYS 108>.A<O 22>
+  Added missing heavy atom: .R<LYS 108>.A<CE 14>
+  Added missing heavy atom: .R<LYS 108>.A<NZ 17>
+  Added missing heavy atom: .R<CYS 109>.A<CA 3>
+  Added missing heavy atom: .R<CYS 109>.A<SG 8>
+  Added missing heavy atom: .R<CYS 109>.A<N 1>
+  Added missing heavy atom: .R<CYS 109>.A<C 10>
+  Added missing heavy atom: .R<CYS 109>.A<O 11>
+  Added missing heavy atom: .R<ASP 110>.A<CA 3>
+  Added missing heavy atom: .R<ASP 110>.A<CG 8>
+  Added missing heavy atom: .R<ASP 110>.A<N 1>
+  Added missing heavy atom: .R<ASP 110>.A<C 11>
+  Added missing heavy atom: .R<ASP 110>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 110>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 110>.A<O 12>
+  Added missing heavy atom: .R<LEU 111>.A<CA 3>
+  Added missing heavy atom: .R<LEU 111>.A<CG 8>
+  Added missing heavy atom: .R<LEU 111>.A<N 1>
+  Added missing heavy atom: .R<LEU 111>.A<C 18>
+  Added missing heavy atom: .R<LEU 111>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 111>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 111>.A<O 19>
+  Added missing heavy atom: .R<ALA 112>.A<CA 3>
+  Added missing heavy atom: .R<ALA 112>.A<N 1>
+  Added missing heavy atom: .R<ALA 112>.A<C 9>
+  Added missing heavy atom: .R<ALA 112>.A<O 10>
+  Added missing heavy atom: .R<ALA 113>.A<CA 3>
+  Added missing heavy atom: .R<ALA 113>.A<N 1>
+  Added missing heavy atom: .R<ALA 113>.A<C 9>
+  Added missing heavy atom: .R<ALA 113>.A<O 10>
+  Added missing heavy atom: .R<ARG 114>.A<CA 3>
+  Added missing heavy atom: .R<ARG 114>.A<CG 8>
+  Added missing heavy atom: .R<ARG 114>.A<N 1>
+  Added missing heavy atom: .R<ARG 114>.A<C 23>
+  Added missing heavy atom: .R<ARG 114>.A<CD 11>
+  Added missing heavy atom: .R<ARG 114>.A<O 24>
+  Added missing heavy atom: .R<ARG 114>.A<NE 14>
+  Added missing heavy atom: .R<ARG 114>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 114>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 114>.A<NH2 20>
+  Added missing heavy atom: .R<THR 115>.A<CA 3>
+  Added missing heavy atom: .R<THR 115>.A<CG2 7>
+  Added missing heavy atom: .R<THR 115>.A<OG1 11>
+  Added missing heavy atom: .R<THR 115>.A<N 1>
+  Added missing heavy atom: .R<THR 115>.A<C 13>
+  Added missing heavy atom: .R<THR 115>.A<O 14>
+  Added missing heavy atom: .R<VAL 116>.A<CA 3>
+  Added missing heavy atom: .R<VAL 116>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 116>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 116>.A<N 1>
+  Added missing heavy atom: .R<VAL 116>.A<C 15>
+  Added missing heavy atom: .R<VAL 116>.A<O 16>
+  Added missing heavy atom: .R<GLU 117>.A<CA 3>
+  Added missing heavy atom: .R<GLU 117>.A<CG 8>
+  Added missing heavy atom: .R<GLU 117>.A<N 1>
+  Added missing heavy atom: .R<GLU 117>.A<C 14>
+  Added missing heavy atom: .R<GLU 117>.A<CD 11>
+  Added missing heavy atom: .R<GLU 117>.A<O 15>
+  Added missing heavy atom: .R<GLU 117>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 117>.A<OE2 13>
+  Added missing heavy atom: .R<SER 118>.A<CA 3>
+  Added missing heavy atom: .R<SER 118>.A<OG 8>
+  Added missing heavy atom: .R<SER 118>.A<N 1>
+  Added missing heavy atom: .R<SER 118>.A<C 10>
+  Added missing heavy atom: .R<SER 118>.A<O 11>
+  Added missing heavy atom: .R<ARG 119>.A<CA 3>
+  Added missing heavy atom: .R<ARG 119>.A<CG 8>
+  Added missing heavy atom: .R<ARG 119>.A<N 1>
+  Added missing heavy atom: .R<ARG 119>.A<C 23>
+  Added missing heavy atom: .R<ARG 119>.A<CD 11>
+  Added missing heavy atom: .R<ARG 119>.A<O 24>
+  Added missing heavy atom: .R<ARG 119>.A<NE 14>
+  Added missing heavy atom: .R<ARG 119>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 119>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 119>.A<NH2 20>
+  Added missing heavy atom: .R<GLN 120>.A<CA 3>
+  Added missing heavy atom: .R<GLN 120>.A<CG 8>
+  Added missing heavy atom: .R<GLN 120>.A<N 1>
+  Added missing heavy atom: .R<GLN 120>.A<C 16>
+  Added missing heavy atom: .R<GLN 120>.A<CD 11>
+  Added missing heavy atom: .R<GLN 120>.A<O 17>
+  Added missing heavy atom: .R<GLN 120>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 120>.A<NE2 13>
+  Added missing heavy atom: .R<ALA 121>.A<CA 3>
+  Added missing heavy atom: .R<ALA 121>.A<N 1>
+  Added missing heavy atom: .R<ALA 121>.A<C 9>
+  Added missing heavy atom: .R<ALA 121>.A<O 10>
+  Added missing heavy atom: .R<GLN 122>.A<CA 3>
+  Added missing heavy atom: .R<GLN 122>.A<CG 8>
+  Added missing heavy atom: .R<GLN 122>.A<N 1>
+  Added missing heavy atom: .R<GLN 122>.A<C 16>
+  Added missing heavy atom: .R<GLN 122>.A<CD 11>
+  Added missing heavy atom: .R<GLN 122>.A<O 17>
+  Added missing heavy atom: .R<GLN 122>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 122>.A<NE2 13>
+  Added missing heavy atom: .R<ASP 123>.A<CA 3>
+  Added missing heavy atom: .R<ASP 123>.A<CG 8>
+  Added missing heavy atom: .R<ASP 123>.A<N 1>
+  Added missing heavy atom: .R<ASP 123>.A<C 11>
+  Added missing heavy atom: .R<ASP 123>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 123>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 123>.A<O 12>
+  Added missing heavy atom: .R<LEU 124>.A<CA 3>
+  Added missing heavy atom: .R<LEU 124>.A<CG 8>
+  Added missing heavy atom: .R<LEU 124>.A<N 1>
+  Added missing heavy atom: .R<LEU 124>.A<C 18>
+  Added missing heavy atom: .R<LEU 124>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 124>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 124>.A<O 19>
+  Added missing heavy atom: .R<ALA 125>.A<CA 3>
+  Added missing heavy atom: .R<ALA 125>.A<N 1>
+  Added missing heavy atom: .R<ALA 125>.A<C 9>
+  Added missing heavy atom: .R<ALA 125>.A<O 10>
+  Added missing heavy atom: .R<ARG 126>.A<CA 3>
+  Added missing heavy atom: .R<ARG 126>.A<CG 8>
+  Added missing heavy atom: .R<ARG 126>.A<N 1>
+  Added missing heavy atom: .R<ARG 126>.A<C 23>
+  Added missing heavy atom: .R<ARG 126>.A<CD 11>
+  Added missing heavy atom: .R<ARG 126>.A<O 24>
+  Added missing heavy atom: .R<ARG 126>.A<NE 14>
+  Added missing heavy atom: .R<ARG 126>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 126>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 126>.A<NH2 20>
+  Added missing heavy atom: .R<SER 127>.A<CA 3>
+  Added missing heavy atom: .R<SER 127>.A<OG 8>
+  Added missing heavy atom: .R<SER 127>.A<N 1>
+  Added missing heavy atom: .R<SER 127>.A<C 10>
+  Added missing heavy atom: .R<SER 127>.A<O 11>
+  Added missing heavy atom: .R<TYR 128>.A<CA 3>
+  Added missing heavy atom: .R<TYR 128>.A<CG 8>
+  Added missing heavy atom: .R<TYR 128>.A<N 1>
+  Added missing heavy atom: .R<TYR 128>.A<C 20>
+  Added missing heavy atom: .R<TYR 128>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 128>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 128>.A<O 21>
+  Added missing heavy atom: .R<TYR 128>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 128>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 128>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 128>.A<OH 14>
+  Added missing heavy atom: .R<ILE 129>.A<CA 3>
+  Added missing heavy atom: .R<ILE 129>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 129>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 129>.A<N 1>
+  Added missing heavy atom: .R<ILE 129>.A<C 18>
+  Added missing heavy atom: .R<ILE 129>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 129>.A<O 19>
+  Added missing heavy atom: .R<PRO 130>.A<CG 5>
+  Added missing heavy atom: .R<PRO 130>.A<CA 11>
+  Added missing heavy atom: .R<PRO 130>.A<CD 2>
+  Added missing heavy atom: .R<PRO 130>.A<N 1>
+  Added missing heavy atom: .R<PRO 130>.A<C 13>
+  Added missing heavy atom: .R<PRO 130>.A<O 14>
+  Added missing heavy atom: .R<TYR 131>.A<CA 3>
+  Added missing heavy atom: .R<TYR 131>.A<CG 8>
+  Added missing heavy atom: .R<TYR 131>.A<N 1>
+  Added missing heavy atom: .R<TYR 131>.A<C 20>
+  Added missing heavy atom: .R<TYR 131>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 131>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 131>.A<O 21>
+  Added missing heavy atom: .R<TYR 131>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 131>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 131>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 131>.A<OH 14>
+  Added missing heavy atom: .R<ILE 132>.A<CA 3>
+  Added missing heavy atom: .R<ILE 132>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 132>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 132>.A<N 1>
+  Added missing heavy atom: .R<ILE 132>.A<C 18>
+  Added missing heavy atom: .R<ILE 132>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 132>.A<O 19>
+  Added missing heavy atom: .R<GLU 133>.A<CA 3>
+  Added missing heavy atom: .R<GLU 133>.A<CG 8>
+  Added missing heavy atom: .R<GLU 133>.A<N 1>
+  Added missing heavy atom: .R<GLU 133>.A<C 14>
+  Added missing heavy atom: .R<GLU 133>.A<CD 11>
+  Added missing heavy atom: .R<GLU 133>.A<O 15>
+  Added missing heavy atom: .R<GLU 133>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 133>.A<OE2 13>
+  Added missing heavy atom: .R<THR 134>.A<CA 3>
+  Added missing heavy atom: .R<THR 134>.A<CG2 7>
+  Added missing heavy atom: .R<THR 134>.A<OG1 11>
+  Added missing heavy atom: .R<THR 134>.A<N 1>
+  Added missing heavy atom: .R<THR 134>.A<C 13>
+  Added missing heavy atom: .R<THR 134>.A<O 14>
+  Added missing heavy atom: .R<SER 135>.A<CA 3>
+  Added missing heavy atom: .R<SER 135>.A<OG 8>
+  Added missing heavy atom: .R<SER 135>.A<N 1>
+  Added missing heavy atom: .R<SER 135>.A<C 10>
+  Added missing heavy atom: .R<SER 135>.A<O 11>
+  Added missing heavy atom: .R<ALA 136>.A<CA 3>
+  Added missing heavy atom: .R<ALA 136>.A<N 1>
+  Added missing heavy atom: .R<ALA 136>.A<C 9>
+  Added missing heavy atom: .R<ALA 136>.A<O 10>
+  Added missing heavy atom: .R<LYS 137>.A<CA 3>
+  Added missing heavy atom: .R<LYS 137>.A<CG 8>
+  Added missing heavy atom: .R<LYS 137>.A<N 1>
+  Added missing heavy atom: .R<LYS 137>.A<C 21>
+  Added missing heavy atom: .R<LYS 137>.A<CD 11>
+  Added missing heavy atom: .R<LYS 137>.A<O 22>
+  Added missing heavy atom: .R<LYS 137>.A<CE 14>
+  Added missing heavy atom: .R<LYS 137>.A<NZ 17>
+  Added missing heavy atom: .R<THR 138>.A<CA 3>
+  Added missing heavy atom: .R<THR 138>.A<CG2 7>
+  Added missing heavy atom: .R<THR 138>.A<OG1 11>
+  Added missing heavy atom: .R<THR 138>.A<N 1>
+  Added missing heavy atom: .R<THR 138>.A<C 13>
+  Added missing heavy atom: .R<THR 138>.A<O 14>
+  Added missing heavy atom: .R<ARG 139>.A<CA 3>
+  Added missing heavy atom: .R<ARG 139>.A<CG 8>
+  Added missing heavy atom: .R<ARG 139>.A<N 1>
+  Added missing heavy atom: .R<ARG 139>.A<C 23>
+  Added missing heavy atom: .R<ARG 139>.A<CD 11>
+  Added missing heavy atom: .R<ARG 139>.A<O 24>
+  Added missing heavy atom: .R<ARG 139>.A<NE 14>
+  Added missing heavy atom: .R<ARG 139>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 139>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 139>.A<NH2 20>
+  Added missing heavy atom: .R<GLN 140>.A<CA 3>
+  Added missing heavy atom: .R<GLN 140>.A<CG 8>
+  Added missing heavy atom: .R<GLN 140>.A<N 1>
+  Added missing heavy atom: .R<GLN 140>.A<C 16>
+  Added missing heavy atom: .R<GLN 140>.A<CD 11>
+  Added missing heavy atom: .R<GLN 140>.A<O 17>
+  Added missing heavy atom: .R<GLN 140>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 140>.A<NE2 13>
+  Added missing heavy atom: .R<VAL 141>.A<CA 3>
+  Added missing heavy atom: .R<VAL 141>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 141>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 141>.A<N 1>
+  Added missing heavy atom: .R<VAL 141>.A<C 15>
+  Added missing heavy atom: .R<VAL 141>.A<O 16>
+  Added missing heavy atom: .R<GLU 142>.A<CA 3>
+  Added missing heavy atom: .R<GLU 142>.A<CG 8>
+  Added missing heavy atom: .R<GLU 142>.A<N 1>
+  Added missing heavy atom: .R<GLU 142>.A<C 14>
+  Added missing heavy atom: .R<GLU 142>.A<CD 11>
+  Added missing heavy atom: .R<GLU 142>.A<O 15>
+  Added missing heavy atom: .R<GLU 142>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 142>.A<OE2 13>
+  Added missing heavy atom: .R<ASP 143>.A<CA 3>
+  Added missing heavy atom: .R<ASP 143>.A<CG 8>
+  Added missing heavy atom: .R<ASP 143>.A<N 1>
+  Added missing heavy atom: .R<ASP 143>.A<C 11>
+  Added missing heavy atom: .R<ASP 143>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 143>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 143>.A<O 12>
+  Added missing heavy atom: .R<ALA 144>.A<CA 3>
+  Added missing heavy atom: .R<ALA 144>.A<N 1>
+  Added missing heavy atom: .R<ALA 144>.A<C 9>
+  Added missing heavy atom: .R<ALA 144>.A<O 10>
+  Added missing heavy atom: .R<PHE 145>.A<CA 3>
+  Added missing heavy atom: .R<PHE 145>.A<CG 8>
+  Added missing heavy atom: .R<PHE 145>.A<N 1>
+  Added missing heavy atom: .R<PHE 145>.A<C 19>
+  Added missing heavy atom: .R<PHE 145>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 145>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 145>.A<O 20>
+  Added missing heavy atom: .R<PHE 145>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 145>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 145>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 146>.A<CA 3>
+  Added missing heavy atom: .R<TYR 146>.A<CG 8>
+  Added missing heavy atom: .R<TYR 146>.A<N 1>
+  Added missing heavy atom: .R<TYR 146>.A<C 20>
+  Added missing heavy atom: .R<TYR 146>.A<CD1 9>
+  Added missing heavy atom: .R<TYR 146>.A<CD2 18>
+  Added missing heavy atom: .R<TYR 146>.A<O 21>
+  Added missing heavy atom: .R<TYR 146>.A<CE1 11>
+  Added missing heavy atom: .R<TYR 146>.A<CE2 16>
+  Added missing heavy atom: .R<TYR 146>.A<CZ 13>
+  Added missing heavy atom: .R<TYR 146>.A<OH 14>
+  Added missing heavy atom: .R<THR 147>.A<CA 3>
+  Added missing heavy atom: .R<THR 147>.A<CG2 7>
+  Added missing heavy atom: .R<THR 147>.A<OG1 11>
+  Added missing heavy atom: .R<THR 147>.A<N 1>
+  Added missing heavy atom: .R<THR 147>.A<C 13>
+  Added missing heavy atom: .R<THR 147>.A<O 14>
+  Added missing heavy atom: .R<LEU 148>.A<CA 3>
+  Added missing heavy atom: .R<LEU 148>.A<CG 8>
+  Added missing heavy atom: .R<LEU 148>.A<N 1>
+  Added missing heavy atom: .R<LEU 148>.A<C 18>
+  Added missing heavy atom: .R<LEU 148>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 148>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 148>.A<O 19>
+  Added missing heavy atom: .R<VAL 149>.A<CA 3>
+  Added missing heavy atom: .R<VAL 149>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 149>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 149>.A<N 1>
+  Added missing heavy atom: .R<VAL 149>.A<C 15>
+  Added missing heavy atom: .R<VAL 149>.A<O 16>
+  Added missing heavy atom: .R<ARG 150>.A<CA 3>
+  Added missing heavy atom: .R<ARG 150>.A<CG 8>
+  Added missing heavy atom: .R<ARG 150>.A<N 1>
+  Added missing heavy atom: .R<ARG 150>.A<C 23>
+  Added missing heavy atom: .R<ARG 150>.A<CD 11>
+  Added missing heavy atom: .R<ARG 150>.A<O 24>
+  Added missing heavy atom: .R<ARG 150>.A<NE 14>
+  Added missing heavy atom: .R<ARG 150>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 150>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 150>.A<NH2 20>
+  Added missing heavy atom: .R<GLU 151>.A<CA 3>
+  Added missing heavy atom: .R<GLU 151>.A<CG 8>
+  Added missing heavy atom: .R<GLU 151>.A<N 1>
+  Added missing heavy atom: .R<GLU 151>.A<C 14>
+  Added missing heavy atom: .R<GLU 151>.A<CD 11>
+  Added missing heavy atom: .R<GLU 151>.A<O 15>
+  Added missing heavy atom: .R<GLU 151>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 151>.A<OE2 13>
+  Added missing heavy atom: .R<ILE 152>.A<CA 3>
+  Added missing heavy atom: .R<ILE 152>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 152>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 152>.A<N 1>
+  Added missing heavy atom: .R<ILE 152>.A<C 18>
+  Added missing heavy atom: .R<ILE 152>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 152>.A<O 19>
+  Added missing heavy atom: .R<ARG 153>.A<CA 3>
+  Added missing heavy atom: .R<ARG 153>.A<CG 8>
+  Added missing heavy atom: .R<ARG 153>.A<N 1>
+  Added missing heavy atom: .R<ARG 153>.A<C 23>
+  Added missing heavy atom: .R<ARG 153>.A<CD 11>
+  Added missing heavy atom: .R<ARG 153>.A<O 24>
+  Added missing heavy atom: .R<ARG 153>.A<NE 14>
+  Added missing heavy atom: .R<ARG 153>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 153>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 153>.A<NH2 20>
+  Added missing heavy atom: .R<GLN 154>.A<CA 3>
+  Added missing heavy atom: .R<GLN 154>.A<CG 8>
+  Added missing heavy atom: .R<GLN 154>.A<N 1>
+  Added missing heavy atom: .R<GLN 154>.A<C 16>
+  Added missing heavy atom: .R<GLN 154>.A<CD 11>
+  Added missing heavy atom: .R<GLN 154>.A<O 17>
+  Added missing heavy atom: .R<GLN 154>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 154>.A<NE2 13>
+  Added missing heavy atom: .R<HIP 155>.A<CA 3>
+  Added missing heavy atom: .R<HIP 155>.A<CG 8>
+  Added missing heavy atom: .R<HIP 155>.A<N 1>
+  Added missing heavy atom: .R<HIP 155>.A<C 17>
+  Added missing heavy atom: .R<HIP 155>.A<ND1 9>
+  Added missing heavy atom: .R<HIP 155>.A<CD2 15>
+  Added missing heavy atom: .R<HIP 155>.A<O 18>
+  Added missing heavy atom: .R<HIP 155>.A<CE1 11>
+  Added missing heavy atom: .R<HIP 155>.A<NE2 13>
+  Added missing heavy atom: .R<ASN 156>.A<CA 3>
+  Added missing heavy atom: .R<ASN 156>.A<CG 8>
+  Added missing heavy atom: .R<ASN 156>.A<N 1>
+  Added missing heavy atom: .R<ASN 156>.A<C 13>
+  Added missing heavy atom: .R<ASN 156>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 156>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 156>.A<O 14>
+  Added missing heavy atom: .R<THR 157>.A<CA 3>
+  Added missing heavy atom: .R<THR 157>.A<CG2 7>
+  Added missing heavy atom: .R<THR 157>.A<OG1 11>
+  Added missing heavy atom: .R<THR 157>.A<N 1>
+  Added missing heavy atom: .R<THR 157>.A<C 13>
+  Added missing heavy atom: .R<THR 157>.A<O 14>
+  Added missing heavy atom: .R<ILE 158>.A<CA 3>
+  Added missing heavy atom: .R<ILE 158>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 158>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 158>.A<N 1>
+  Added missing heavy atom: .R<ILE 158>.A<C 18>
+  Added missing heavy atom: .R<ILE 158>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 158>.A<O 19>
+  Added missing heavy atom: .R<ARG 159>.A<CA 3>
+  Added missing heavy atom: .R<ARG 159>.A<CG 8>
+  Added missing heavy atom: .R<ARG 159>.A<N 1>
+  Added missing heavy atom: .R<ARG 159>.A<C 23>
+  Added missing heavy atom: .R<ARG 159>.A<CD 11>
+  Added missing heavy atom: .R<ARG 159>.A<O 24>
+  Added missing heavy atom: .R<ARG 159>.A<NE 14>
+  Added missing heavy atom: .R<ARG 159>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 159>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 159>.A<NH2 20>
+  Added missing heavy atom: .R<VAL 160>.A<CA 3>
+  Added missing heavy atom: .R<VAL 160>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 160>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 160>.A<N 1>
+  Added missing heavy atom: .R<VAL 160>.A<C 15>
+  Added missing heavy atom: .R<VAL 160>.A<O 16>
+  Added missing heavy atom: .R<PHE 161>.A<CA 3>
+  Added missing heavy atom: .R<PHE 161>.A<CG 8>
+  Added missing heavy atom: .R<PHE 161>.A<N 1>
+  Added missing heavy atom: .R<PHE 161>.A<C 19>
+  Added missing heavy atom: .R<PHE 161>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 161>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 161>.A<O 20>
+  Added missing heavy atom: .R<PHE 161>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 161>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 161>.A<CZ 13>
+  Added missing heavy atom: .R<LEU 162>.A<CA 3>
+  Added missing heavy atom: .R<LEU 162>.A<CG 8>
+  Added missing heavy atom: .R<LEU 162>.A<N 1>
+  Added missing heavy atom: .R<LEU 162>.A<C 18>
+  Added missing heavy atom: .R<LEU 162>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 162>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 162>.A<O 19>
+  Added missing heavy atom: .R<PRO 163>.A<CG 5>
+  Added missing heavy atom: .R<PRO 163>.A<CA 11>
+  Added missing heavy atom: .R<PRO 163>.A<CD 2>
+  Added missing heavy atom: .R<PRO 163>.A<N 1>
+  Added missing heavy atom: .R<PRO 163>.A<C 13>
+  Added missing heavy atom: .R<PRO 163>.A<O 14>
+  Added missing heavy atom: .R<ASN 164>.A<CA 3>
+  Added missing heavy atom: .R<ASN 164>.A<CG 8>
+  Added missing heavy atom: .R<ASN 164>.A<N 1>
+  Added missing heavy atom: .R<ASN 164>.A<C 13>
+  Added missing heavy atom: .R<ASN 164>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 164>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 164>.A<O 14>
+  Added missing heavy atom: .R<LYS 165>.A<CA 3>
+  Added missing heavy atom: .R<LYS 165>.A<CG 8>
+  Added missing heavy atom: .R<LYS 165>.A<N 1>
+  Added missing heavy atom: .R<LYS 165>.A<C 21>
+  Added missing heavy atom: .R<LYS 165>.A<CD 11>
+  Added missing heavy atom: .R<LYS 165>.A<O 22>
+  Added missing heavy atom: .R<LYS 165>.A<CE 14>
+  Added missing heavy atom: .R<LYS 165>.A<NZ 17>
+  Added missing heavy atom: .R<GLN 166>.A<CA 3>
+  Added missing heavy atom: .R<GLN 166>.A<CG 8>
+  Added missing heavy atom: .R<GLN 166>.A<N 1>
+  Added missing heavy atom: .R<GLN 166>.A<C 16>
+  Added missing heavy atom: .R<GLN 166>.A<CD 11>
+  Added missing heavy atom: .R<GLN 166>.A<O 17>
+  Added missing heavy atom: .R<GLN 166>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 166>.A<NE2 13>
+  Added missing heavy atom: .R<ARG 167>.A<CA 3>
+  Added missing heavy atom: .R<ARG 167>.A<CG 8>
+  Added missing heavy atom: .R<ARG 167>.A<N 1>
+  Added missing heavy atom: .R<ARG 167>.A<C 23>
+  Added missing heavy atom: .R<ARG 167>.A<CD 11>
+  Added missing heavy atom: .R<ARG 167>.A<O 24>
+  Added missing heavy atom: .R<ARG 167>.A<NE 14>
+  Added missing heavy atom: .R<ARG 167>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 167>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 167>.A<NH2 20>
+  Added missing heavy atom: .R<THR 168>.A<CA 3>
+  Added missing heavy atom: .R<THR 168>.A<CG2 7>
+  Added missing heavy atom: .R<THR 168>.A<OG1 11>
+  Added missing heavy atom: .R<THR 168>.A<N 1>
+  Added missing heavy atom: .R<THR 168>.A<C 13>
+  Added missing heavy atom: .R<THR 168>.A<O 14>
+  Added missing heavy atom: .R<VAL 169>.A<CA 3>
+  Added missing heavy atom: .R<VAL 169>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 169>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 169>.A<N 1>
+  Added missing heavy atom: .R<VAL 169>.A<C 15>
+  Added missing heavy atom: .R<VAL 169>.A<O 16>
+  Added missing heavy atom: .R<VAL 170>.A<CA 3>
+  Added missing heavy atom: .R<VAL 170>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 170>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 170>.A<N 1>
+  Added missing heavy atom: .R<VAL 170>.A<C 15>
+  Added missing heavy atom: .R<VAL 170>.A<O 16>
+  Added missing heavy atom: .R<ASN 171>.A<CA 3>
+  Added missing heavy atom: .R<ASN 171>.A<CG 8>
+  Added missing heavy atom: .R<ASN 171>.A<N 1>
+  Added missing heavy atom: .R<ASN 171>.A<C 13>
+  Added missing heavy atom: .R<ASN 171>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 171>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 171>.A<O 14>
+  Added missing heavy atom: .R<VAL 172>.A<CA 3>
+  Added missing heavy atom: .R<VAL 172>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 172>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 172>.A<N 1>
+  Added missing heavy atom: .R<VAL 172>.A<C 15>
+  Added missing heavy atom: .R<VAL 172>.A<O 16>
+  Added missing heavy atom: .R<ARG 173>.A<CA 3>
+  Added missing heavy atom: .R<ARG 173>.A<CG 8>
+  Added missing heavy atom: .R<ARG 173>.A<N 1>
+  Added missing heavy atom: .R<ARG 173>.A<C 23>
+  Added missing heavy atom: .R<ARG 173>.A<CD 11>
+  Added missing heavy atom: .R<ARG 173>.A<O 24>
+  Added missing heavy atom: .R<ARG 173>.A<NE 14>
+  Added missing heavy atom: .R<ARG 173>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 173>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 173>.A<NH2 20>
+  Added missing heavy atom: .R<ASN 174>.A<CA 3>
+  Added missing heavy atom: .R<ASN 174>.A<CG 8>
+  Added missing heavy atom: .R<ASN 174>.A<N 1>
+  Added missing heavy atom: .R<ASN 174>.A<C 13>
+  Added missing heavy atom: .R<ASN 174>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 174>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 174>.A<O 14>
+  Added missing heavy atom: .R<MET 175>.A<CA 3>
+  Added missing heavy atom: .R<MET 175>.A<CG 8>
+  Added missing heavy atom: .R<MET 175>.A<N 1>
+  Added missing heavy atom: .R<MET 175>.A<C 16>
+  Added missing heavy atom: .R<MET 175>.A<SD 11>
+  Added missing heavy atom: .R<MET 175>.A<O 17>
+  Added missing heavy atom: .R<MET 175>.A<CE 12>
+  Added missing heavy atom: .R<SER 176>.A<CA 3>
+  Added missing heavy atom: .R<SER 176>.A<OG 8>
+  Added missing heavy atom: .R<SER 176>.A<N 1>
+  Added missing heavy atom: .R<SER 176>.A<C 10>
+  Added missing heavy atom: .R<SER 176>.A<O 11>
+  Added missing heavy atom: .R<LEU 177>.A<CA 3>
+  Added missing heavy atom: .R<LEU 177>.A<CG 8>
+  Added missing heavy atom: .R<LEU 177>.A<N 1>
+  Added missing heavy atom: .R<LEU 177>.A<C 18>
+  Added missing heavy atom: .R<LEU 177>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 177>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 177>.A<O 19>
+  Added missing heavy atom: .R<HIP 178>.A<CA 3>
+  Added missing heavy atom: .R<HIP 178>.A<CG 8>
+  Added missing heavy atom: .R<HIP 178>.A<N 1>
+  Added missing heavy atom: .R<HIP 178>.A<C 17>
+  Added missing heavy atom: .R<HIP 178>.A<ND1 9>
+  Added missing heavy atom: .R<HIP 178>.A<CD2 15>
+  Added missing heavy atom: .R<HIP 178>.A<O 18>
+  Added missing heavy atom: .R<HIP 178>.A<CE1 11>
+  Added missing heavy atom: .R<HIP 178>.A<NE2 13>
+  Added missing heavy atom: .R<ASP 179>.A<CA 3>
+  Added missing heavy atom: .R<ASP 179>.A<CG 8>
+  Added missing heavy atom: .R<ASP 179>.A<N 1>
+  Added missing heavy atom: .R<ASP 179>.A<C 11>
+  Added missing heavy atom: .R<ASP 179>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 179>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 179>.A<O 12>
+  Added missing heavy atom: .R<CYS 180>.A<CA 3>
+  Added missing heavy atom: .R<CYS 180>.A<SG 8>
+  Added missing heavy atom: .R<CYS 180>.A<N 1>
+  Added missing heavy atom: .R<CYS 180>.A<C 10>
+  Added missing heavy atom: .R<CYS 180>.A<O 11>
+  Added missing heavy atom: .R<LEU 181>.A<CA 3>
+  Added missing heavy atom: .R<LEU 181>.A<CG 8>
+  Added missing heavy atom: .R<LEU 181>.A<N 1>
+  Added missing heavy atom: .R<LEU 181>.A<C 18>
+  Added missing heavy atom: .R<LEU 181>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 181>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 181>.A<O 19>
+  Added missing heavy atom: .R<MET 182>.A<CA 3>
+  Added missing heavy atom: .R<MET 182>.A<CG 8>
+  Added missing heavy atom: .R<MET 182>.A<N 1>
+  Added missing heavy atom: .R<MET 182>.A<C 16>
+  Added missing heavy atom: .R<MET 182>.A<SD 11>
+  Added missing heavy atom: .R<MET 182>.A<O 17>
+  Added missing heavy atom: .R<MET 182>.A<CE 12>
+  Added missing heavy atom: .R<LYS 183>.A<CA 3>
+  Added missing heavy atom: .R<LYS 183>.A<CG 8>
+  Added missing heavy atom: .R<LYS 183>.A<N 1>
+  Added missing heavy atom: .R<LYS 183>.A<C 21>
+  Added missing heavy atom: .R<LYS 183>.A<CD 11>
+  Added missing heavy atom: .R<LYS 183>.A<O 22>
+  Added missing heavy atom: .R<LYS 183>.A<CE 14>
+  Added missing heavy atom: .R<LYS 183>.A<NZ 17>
+  Added missing heavy atom: .R<ALA 184>.A<CA 3>
+  Added missing heavy atom: .R<ALA 184>.A<N 1>
+  Added missing heavy atom: .R<ALA 184>.A<C 9>
+  Added missing heavy atom: .R<ALA 184>.A<O 10>
+  Added missing heavy atom: .R<LEU 185>.A<CA 3>
+  Added missing heavy atom: .R<LEU 185>.A<CG 8>
+  Added missing heavy atom: .R<LEU 185>.A<N 1>
+  Added missing heavy atom: .R<LEU 185>.A<C 18>
+  Added missing heavy atom: .R<LEU 185>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 185>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 185>.A<O 19>
+  Added missing heavy atom: .R<LYS 186>.A<CA 3>
+  Added missing heavy atom: .R<LYS 186>.A<CG 8>
+  Added missing heavy atom: .R<LYS 186>.A<N 1>
+  Added missing heavy atom: .R<LYS 186>.A<C 21>
+  Added missing heavy atom: .R<LYS 186>.A<CD 11>
+  Added missing heavy atom: .R<LYS 186>.A<O 22>
+  Added missing heavy atom: .R<LYS 186>.A<CE 14>
+  Added missing heavy atom: .R<LYS 186>.A<NZ 17>
+  Added missing heavy atom: .R<VAL 187>.A<CA 3>
+  Added missing heavy atom: .R<VAL 187>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 187>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 187>.A<N 1>
+  Added missing heavy atom: .R<VAL 187>.A<C 15>
+  Added missing heavy atom: .R<VAL 187>.A<O 16>
+  Added missing heavy atom: .R<ARG 188>.A<CA 3>
+  Added missing heavy atom: .R<ARG 188>.A<CG 8>
+  Added missing heavy atom: .R<ARG 188>.A<N 1>
+  Added missing heavy atom: .R<ARG 188>.A<C 23>
+  Added missing heavy atom: .R<ARG 188>.A<CD 11>
+  Added missing heavy atom: .R<ARG 188>.A<O 24>
+  Added missing heavy atom: .R<ARG 188>.A<NE 14>
+  Added missing heavy atom: .R<ARG 188>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 188>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 188>.A<NH2 20>
+  Added missing heavy atom: .R<LEU 189>.A<CA 3>
+  Added missing heavy atom: .R<LEU 189>.A<CG 8>
+  Added missing heavy atom: .R<LEU 189>.A<N 1>
+  Added missing heavy atom: .R<LEU 189>.A<C 18>
+  Added missing heavy atom: .R<LEU 189>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 189>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 189>.A<O 19>
+  Added missing heavy atom: .R<GLN 190>.A<CA 3>
+  Added missing heavy atom: .R<GLN 190>.A<CG 8>
+  Added missing heavy atom: .R<GLN 190>.A<N 1>
+  Added missing heavy atom: .R<GLN 190>.A<C 16>
+  Added missing heavy atom: .R<GLN 190>.A<CD 11>
+  Added missing heavy atom: .R<GLN 190>.A<O 17>
+  Added missing heavy atom: .R<GLN 190>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 190>.A<NE2 13>
+  Added missing heavy atom: .R<PRO 191>.A<CG 5>
+  Added missing heavy atom: .R<PRO 191>.A<CA 11>
+  Added missing heavy atom: .R<PRO 191>.A<CD 2>
+  Added missing heavy atom: .R<PRO 191>.A<N 1>
+  Added missing heavy atom: .R<PRO 191>.A<C 13>
+  Added missing heavy atom: .R<PRO 191>.A<O 14>
+  Added missing heavy atom: .R<GLU 192>.A<CA 3>
+  Added missing heavy atom: .R<GLU 192>.A<CG 8>
+  Added missing heavy atom: .R<GLU 192>.A<N 1>
+  Added missing heavy atom: .R<GLU 192>.A<C 14>
+  Added missing heavy atom: .R<GLU 192>.A<CD 11>
+  Added missing heavy atom: .R<GLU 192>.A<O 15>
+  Added missing heavy atom: .R<GLU 192>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 192>.A<OE2 13>
+  Added missing heavy atom: .R<CYS 193>.A<CA 3>
+  Added missing heavy atom: .R<CYS 193>.A<SG 8>
+  Added missing heavy atom: .R<CYS 193>.A<N 1>
+  Added missing heavy atom: .R<CYS 193>.A<C 10>
+  Added missing heavy atom: .R<CYS 193>.A<O 11>
+  Added missing heavy atom: .R<CYS 194>.A<CA 3>
+  Added missing heavy atom: .R<CYS 194>.A<SG 8>
+  Added missing heavy atom: .R<CYS 194>.A<N 1>
+  Added missing heavy atom: .R<CYS 194>.A<C 10>
+  Added missing heavy atom: .R<CYS 194>.A<O 11>
+  Added missing heavy atom: .R<ALA 195>.A<CA 3>
+  Added missing heavy atom: .R<ALA 195>.A<N 1>
+  Added missing heavy atom: .R<ALA 195>.A<C 9>
+  Added missing heavy atom: .R<ALA 195>.A<O 10>
+  Added missing heavy atom: .R<VAL 196>.A<CA 3>
+  Added missing heavy atom: .R<VAL 196>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 196>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 196>.A<N 1>
+  Added missing heavy atom: .R<VAL 196>.A<C 15>
+  Added missing heavy atom: .R<VAL 196>.A<O 16>
+  Added missing heavy atom: .R<PHE 197>.A<CA 3>
+  Added missing heavy atom: .R<PHE 197>.A<CG 8>
+  Added missing heavy atom: .R<PHE 197>.A<N 1>
+  Added missing heavy atom: .R<PHE 197>.A<C 19>
+  Added missing heavy atom: .R<PHE 197>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 197>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 197>.A<O 20>
+  Added missing heavy atom: .R<PHE 197>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 197>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 197>.A<CZ 13>
+  Added missing heavy atom: .R<ARG 198>.A<CA 3>
+  Added missing heavy atom: .R<ARG 198>.A<CG 8>
+  Added missing heavy atom: .R<ARG 198>.A<N 1>
+  Added missing heavy atom: .R<ARG 198>.A<C 23>
+  Added missing heavy atom: .R<ARG 198>.A<CD 11>
+  Added missing heavy atom: .R<ARG 198>.A<O 24>
+  Added missing heavy atom: .R<ARG 198>.A<NE 14>
+  Added missing heavy atom: .R<ARG 198>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 198>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 198>.A<NH2 20>
+  Added missing heavy atom: .R<LEU 199>.A<CA 3>
+  Added missing heavy atom: .R<LEU 199>.A<CG 8>
+  Added missing heavy atom: .R<LEU 199>.A<N 1>
+  Added missing heavy atom: .R<LEU 199>.A<C 18>
+  Added missing heavy atom: .R<LEU 199>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 199>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 199>.A<O 19>
+  Added missing heavy atom: .R<LEU 200>.A<CA 3>
+  Added missing heavy atom: .R<LEU 200>.A<CG 8>
+  Added missing heavy atom: .R<LEU 200>.A<N 1>
+  Added missing heavy atom: .R<LEU 200>.A<C 18>
+  Added missing heavy atom: .R<LEU 200>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 200>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 200>.A<O 19>
+  Added missing heavy atom: .R<HID 201>.A<CA 3>
+  Added missing heavy atom: .R<HID 201>.A<CG 8>
+  Added missing heavy atom: .R<HID 201>.A<N 1>
+  Added missing heavy atom: .R<HID 201>.A<C 16>
+  Added missing heavy atom: .R<HID 201>.A<ND1 9>
+  Added missing heavy atom: .R<HID 201>.A<CD2 14>
+  Added missing heavy atom: .R<HID 201>.A<O 17>
+  Added missing heavy atom: .R<HID 201>.A<CE1 11>
+  Added missing heavy atom: .R<HID 201>.A<NE2 13>
+  Added missing heavy atom: .R<GLU 202>.A<CA 3>
+  Added missing heavy atom: .R<GLU 202>.A<CG 8>
+  Added missing heavy atom: .R<GLU 202>.A<N 1>
+  Added missing heavy atom: .R<GLU 202>.A<C 14>
+  Added missing heavy atom: .R<GLU 202>.A<CD 11>
+  Added missing heavy atom: .R<GLU 202>.A<O 15>
+  Added missing heavy atom: .R<GLU 202>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 202>.A<OE2 13>
+  Added missing heavy atom: .R<HIP 203>.A<CA 3>
+  Added missing heavy atom: .R<HIP 203>.A<CG 8>
+  Added missing heavy atom: .R<HIP 203>.A<N 1>
+  Added missing heavy atom: .R<HIP 203>.A<C 17>
+  Added missing heavy atom: .R<HIP 203>.A<ND1 9>
+  Added missing heavy atom: .R<HIP 203>.A<CD2 15>
+  Added missing heavy atom: .R<HIP 203>.A<O 18>
+  Added missing heavy atom: .R<HIP 203>.A<CE1 11>
+  Added missing heavy atom: .R<HIP 203>.A<NE2 13>
+  Added missing heavy atom: .R<LYS 204>.A<CA 3>
+  Added missing heavy atom: .R<LYS 204>.A<CG 8>
+  Added missing heavy atom: .R<LYS 204>.A<N 1>
+  Added missing heavy atom: .R<LYS 204>.A<C 21>
+  Added missing heavy atom: .R<LYS 204>.A<CD 11>
+  Added missing heavy atom: .R<LYS 204>.A<O 22>
+  Added missing heavy atom: .R<LYS 204>.A<CE 14>
+  Added missing heavy atom: .R<LYS 204>.A<NZ 17>
+  Added missing heavy atom: .R<LYS 205>.A<CA 3>
+  Added missing heavy atom: .R<LYS 205>.A<CG 8>
+  Added missing heavy atom: .R<LYS 205>.A<N 1>
+  Added missing heavy atom: .R<LYS 205>.A<C 21>
+  Added missing heavy atom: .R<LYS 205>.A<CD 11>
+  Added missing heavy atom: .R<LYS 205>.A<O 22>
+  Added missing heavy atom: .R<LYS 205>.A<CE 14>
+  Added missing heavy atom: .R<LYS 205>.A<NZ 17>
+  Added missing heavy atom: .R<LYS 206>.A<CA 3>
+  Added missing heavy atom: .R<LYS 206>.A<CG 8>
+  Added missing heavy atom: .R<LYS 206>.A<N 1>
+  Added missing heavy atom: .R<LYS 206>.A<C 21>
+  Added missing heavy atom: .R<LYS 206>.A<CD 11>
+  Added missing heavy atom: .R<LYS 206>.A<O 22>
+  Added missing heavy atom: .R<LYS 206>.A<CE 14>
+  Added missing heavy atom: .R<LYS 206>.A<NZ 17>
+  Added missing heavy atom: .R<ALA 207>.A<CA 3>
+  Added missing heavy atom: .R<ALA 207>.A<N 1>
+  Added missing heavy atom: .R<ALA 207>.A<C 9>
+  Added missing heavy atom: .R<ALA 207>.A<O 10>
+  Added missing heavy atom: .R<ARG 208>.A<CA 3>
+  Added missing heavy atom: .R<ARG 208>.A<CG 8>
+  Added missing heavy atom: .R<ARG 208>.A<N 1>
+  Added missing heavy atom: .R<ARG 208>.A<C 23>
+  Added missing heavy atom: .R<ARG 208>.A<CD 11>
+  Added missing heavy atom: .R<ARG 208>.A<O 24>
+  Added missing heavy atom: .R<ARG 208>.A<NE 14>
+  Added missing heavy atom: .R<ARG 208>.A<CZ 16>
+  Added missing heavy atom: .R<ARG 208>.A<NH1 17>
+  Added missing heavy atom: .R<ARG 208>.A<NH2 20>
+  Added missing heavy atom: .R<LEU 209>.A<CA 3>
+  Added missing heavy atom: .R<LEU 209>.A<CG 8>
+  Added missing heavy atom: .R<LEU 209>.A<N 1>
+  Added missing heavy atom: .R<LEU 209>.A<C 18>
+  Added missing heavy atom: .R<LEU 209>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 209>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 209>.A<O 19>
+  Added missing heavy atom: .R<ASP 210>.A<CA 3>
+  Added missing heavy atom: .R<ASP 210>.A<CG 8>
+  Added missing heavy atom: .R<ASP 210>.A<N 1>
+  Added missing heavy atom: .R<ASP 210>.A<C 11>
+  Added missing heavy atom: .R<ASP 210>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 210>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 210>.A<O 12>
+  Added missing heavy atom: .R<TRP 211>.A<CA 3>
+  Added missing heavy atom: .R<TRP 211>.A<CG 8>
+  Added missing heavy atom: .R<TRP 211>.A<N 1>
+  Added missing heavy atom: .R<TRP 211>.A<C 23>
+  Added missing heavy atom: .R<TRP 211>.A<CD1 9>
+  Added missing heavy atom: .R<TRP 211>.A<CD2 22>
+  Added missing heavy atom: .R<TRP 211>.A<O 24>
+  Added missing heavy atom: .R<TRP 211>.A<NE1 11>
+  Added missing heavy atom: .R<TRP 211>.A<CE2 13>
+  Added missing heavy atom: .R<TRP 211>.A<CE3 20>
+  Added missing heavy atom: .R<TRP 211>.A<CZ2 14>
+  Added missing heavy atom: .R<TRP 211>.A<CZ3 18>
+  Added missing heavy atom: .R<TRP 211>.A<CH2 16>
+  Added missing heavy atom: .R<ASN 212>.A<CA 3>
+  Added missing heavy atom: .R<ASN 212>.A<CG 8>
+  Added missing heavy atom: .R<ASN 212>.A<N 1>
+  Added missing heavy atom: .R<ASN 212>.A<C 13>
+  Added missing heavy atom: .R<ASN 212>.A<OD1 9>
+  Added missing heavy atom: .R<ASN 212>.A<ND2 10>
+  Added missing heavy atom: .R<ASN 212>.A<O 14>
+  Added missing heavy atom: .R<THR 213>.A<CA 3>
+  Added missing heavy atom: .R<THR 213>.A<CG2 7>
+  Added missing heavy atom: .R<THR 213>.A<OG1 11>
+  Added missing heavy atom: .R<THR 213>.A<N 1>
+  Added missing heavy atom: .R<THR 213>.A<C 13>
+  Added missing heavy atom: .R<THR 213>.A<O 14>
+  Added missing heavy atom: .R<ASP 214>.A<CA 3>
+  Added missing heavy atom: .R<ASP 214>.A<CG 8>
+  Added missing heavy atom: .R<ASP 214>.A<N 1>
+  Added missing heavy atom: .R<ASP 214>.A<C 11>
+  Added missing heavy atom: .R<ASP 214>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 214>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 214>.A<O 12>
+  Added missing heavy atom: .R<ALA 215>.A<CA 3>
+  Added missing heavy atom: .R<ALA 215>.A<N 1>
+  Added missing heavy atom: .R<ALA 215>.A<C 9>
+  Added missing heavy atom: .R<ALA 215>.A<O 10>
+  Added missing heavy atom: .R<ALA 216>.A<CA 3>
+  Added missing heavy atom: .R<ALA 216>.A<N 1>
+  Added missing heavy atom: .R<ALA 216>.A<C 9>
+  Added missing heavy atom: .R<ALA 216>.A<O 10>
+  Added missing heavy atom: .R<SER 217>.A<CA 3>
+  Added missing heavy atom: .R<SER 217>.A<OG 8>
+  Added missing heavy atom: .R<SER 217>.A<N 1>
+  Added missing heavy atom: .R<SER 217>.A<C 10>
+  Added missing heavy atom: .R<SER 217>.A<O 11>
+  Added missing heavy atom: .R<LEU 218>.A<CA 3>
+  Added missing heavy atom: .R<LEU 218>.A<CG 8>
+  Added missing heavy atom: .R<LEU 218>.A<N 1>
+  Added missing heavy atom: .R<LEU 218>.A<C 18>
+  Added missing heavy atom: .R<LEU 218>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 218>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 218>.A<O 19>
+  Added missing heavy atom: .R<ILE 219>.A<CA 3>
+  Added missing heavy atom: .R<ILE 219>.A<CG2 7>
+  Added missing heavy atom: .R<ILE 219>.A<CG1 11>
+  Added missing heavy atom: .R<ILE 219>.A<N 1>
+  Added missing heavy atom: .R<ILE 219>.A<C 18>
+  Added missing heavy atom: .R<ILE 219>.A<CD1 14>
+  Added missing heavy atom: .R<ILE 219>.A<O 19>
+  Added missing heavy atom: .R<GLU 220>.A<CA 3>
+  Added missing heavy atom: .R<GLU 220>.A<CG 8>
+  Added missing heavy atom: .R<GLU 220>.A<N 1>
+  Added missing heavy atom: .R<GLU 220>.A<C 14>
+  Added missing heavy atom: .R<GLU 220>.A<CD 11>
+  Added missing heavy atom: .R<GLU 220>.A<O 15>
+  Added missing heavy atom: .R<GLU 220>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 220>.A<OE2 13>
+  Added missing heavy atom: .R<GLU 221>.A<CA 3>
+  Added missing heavy atom: .R<GLU 221>.A<CG 8>
+  Added missing heavy atom: .R<GLU 221>.A<N 1>
+  Added missing heavy atom: .R<GLU 221>.A<C 14>
+  Added missing heavy atom: .R<GLU 221>.A<CD 11>
+  Added missing heavy atom: .R<GLU 221>.A<O 15>
+  Added missing heavy atom: .R<GLU 221>.A<OE1 12>
+  Added missing heavy atom: .R<GLU 221>.A<OE2 13>
+  Added missing heavy atom: .R<LEU 222>.A<CA 3>
+  Added missing heavy atom: .R<LEU 222>.A<CG 8>
+  Added missing heavy atom: .R<LEU 222>.A<N 1>
+  Added missing heavy atom: .R<LEU 222>.A<C 18>
+  Added missing heavy atom: .R<LEU 222>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 222>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 222>.A<O 19>
+  Added missing heavy atom: .R<GLN 223>.A<CA 3>
+  Added missing heavy atom: .R<GLN 223>.A<CG 8>
+  Added missing heavy atom: .R<GLN 223>.A<N 1>
+  Added missing heavy atom: .R<GLN 223>.A<C 16>
+  Added missing heavy atom: .R<GLN 223>.A<CD 11>
+  Added missing heavy atom: .R<GLN 223>.A<O 17>
+  Added missing heavy atom: .R<GLN 223>.A<OE1 12>
+  Added missing heavy atom: .R<GLN 223>.A<NE2 13>
+  Added missing heavy atom: .R<VAL 224>.A<CA 3>
+  Added missing heavy atom: .R<VAL 224>.A<CG1 7>
+  Added missing heavy atom: .R<VAL 224>.A<CG2 11>
+  Added missing heavy atom: .R<VAL 224>.A<N 1>
+  Added missing heavy atom: .R<VAL 224>.A<C 15>
+  Added missing heavy atom: .R<VAL 224>.A<O 16>
+  Added missing heavy atom: .R<ASP 225>.A<CA 3>
+  Added missing heavy atom: .R<ASP 225>.A<CG 8>
+  Added missing heavy atom: .R<ASP 225>.A<N 1>
+  Added missing heavy atom: .R<ASP 225>.A<C 11>
+  Added missing heavy atom: .R<ASP 225>.A<OD1 9>
+  Added missing heavy atom: .R<ASP 225>.A<OD2 10>
+  Added missing heavy atom: .R<ASP 225>.A<O 12>
+  Added missing heavy atom: .R<PHE 226>.A<CA 3>
+  Added missing heavy atom: .R<PHE 226>.A<CG 8>
+  Added missing heavy atom: .R<PHE 226>.A<N 1>
+  Added missing heavy atom: .R<PHE 226>.A<C 19>
+  Added missing heavy atom: .R<PHE 226>.A<CD1 9>
+  Added missing heavy atom: .R<PHE 226>.A<CD2 17>
+  Added missing heavy atom: .R<PHE 226>.A<O 20>
+  Added missing heavy atom: .R<PHE 226>.A<CE1 11>
+  Added missing heavy atom: .R<PHE 226>.A<CE2 15>
+  Added missing heavy atom: .R<PHE 226>.A<CZ 13>
+  Added missing heavy atom: .R<LEU 227>.A<CA 3>
+  Added missing heavy atom: .R<LEU 227>.A<CG 8>
+  Added missing heavy atom: .R<LEU 227>.A<N 1>
+  Added missing heavy atom: .R<LEU 227>.A<C 18>
+  Added missing heavy atom: .R<LEU 227>.A<CD1 10>
+  Added missing heavy atom: .R<LEU 227>.A<CD2 14>
+  Added missing heavy atom: .R<LEU 227>.A<O 19>
+Creating new UNIT for residue: GTP sequence: 228
+
+/opt/anaconda3/envs/amber_intel/bin/teLeap: Warning!
+One sided connection. Residue () missing connect0 atom.
+Created a new atom named: PB within residue: .R<GTP 228>
+  total atoms in file: 649
+  Leap added 3105 missing atoms according to residue templates:
+       1642 Heavy
+       1463 H / lone pairs
+  The file contained 1 atoms not in residue templates
+> 
+> # Save the gas-phase parameter files (Required for MM-PBSA)
+> saveamberparm com ras-raf_gas.prmtop ras-raf_gas.inpcrd
+Checking Unit.
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 770 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	CHIP	1
+	CLEU	1
+	NASN	1
+	NMET	1
+  )
+ (no restraints)
+> saveamberparm ras ras_gas.prmtop ras_gas.inpcrd
+Checking Unit.
+
+/opt/anaconda3/envs/amber_intel/bin/teLeap: Warning!
+There is a bond of 39.885 angstroms between C and N atoms:
+-------  .R<HIP 166>.A<C 17> and .R<ASN 167>.A<N 1>
+FATAL:  Atom .R<HIP 166>.A<OXT 19> does not have a type.
+FATAL:  Atom .R<ASN 167>.A<H1 15> does not have a type.
+FATAL:  Atom .R<ASN 167>.A<H2 16> does not have a type.
+FATAL:  Atom .R<ASN 167>.A<H3 17> does not have a type.
+
+/opt/anaconda3/envs/amber_intel/bin/teLeap: Fatal Error!
+Failed to generate parameters
+
+Exiting LEaP: Errors = 1; Warnings = 4; Notes = 0.

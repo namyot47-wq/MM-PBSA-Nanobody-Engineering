@@ -1,0 +1,20 @@
+# Load modern force fields and water parameters
+source leaprc.protein.ff14SB
+source leaprc.water.tip3p
+
+# Load the three cleaned structures
+com = loadpdb ras-raf_clean.pdb
+ras = loadpdb ras.pdb
+raf = loadpdb raf.pdb
+
+# Save the gas-phase parameter files (Required for MM-PBSA)
+saveamberparm com ras-raf_gas.prmtop ras-raf_gas.inpcrd
+saveamberparm ras ras_gas.prmtop ras_gas.inpcrd
+saveamberparm raf raf_gas.prmtop raf_gas.inpcrd
+
+# Solvate the complex and save the production files
+solvatebox com TIP3PBOX 12.0
+saveamberparm com ras-raf_solvated.prmtop ras-raf_solvated.inpcrd
+
+# Exit LEaP
+quit
