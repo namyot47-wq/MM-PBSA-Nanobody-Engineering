@@ -7,3 +7,4 @@ minimise ras-raf
   ntr=1, restraintmask=':1-242',
   restraint_wt=2.0
  /
+ 
