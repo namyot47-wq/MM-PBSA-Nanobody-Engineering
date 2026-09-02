@@ -5,7 +5,7 @@ input_pdb: inputs/protein_complex.pdb
 #Strip any non-protein resdiues
 strip_hetero: true
 strip_waters: true
-
+keep_residues: [] #Prevents the stripping of specified residues 
 #Splitting the protein_complex into chain A and B
 receptor_chain: B 
 ligand_chain: A #nanobody
