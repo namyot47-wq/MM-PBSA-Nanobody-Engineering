@@ -33,3 +33,34 @@ charge com
 """
     (out_dir / "tleap.in").write_text(script)
     return out_dir / "tleap.in"
+
+def parmed_split_complex(complex_prmtop, complex_inpcrd, receptor_mask, ligand_mask, out_dir):
+    import parmed as pmd
+
+    complex_parm = pmd.load_file(str(complex_prmtop), str(complex_inpcrd))
+
+    receptor = complex_parm[receptor_mask]   
+    ligand   = complex_parm[ligand_mask]      
+
+    receptor.save(str(out_dir / "receptor_gas.prmtop"), overwrite=True)
+    receptor.save(str(out_dir / "receptor_gas.inpcrd"), overwrite=True)
+    ligand.save(str(out_dir / "ligand_gas.prmtop"), overwrite=True)
+    ligand.save(str(out_dir / "ligand_gas.inpcrd"), overwrite=True)
+
+
+def build_neutralized_solvated_script(complex_prmtop_charge: float, water_model, padding):
+    ion_lines = ""
+    if abs(complex_prmtop_charge) > 1e-3:
+        ion = "Cl-" if complex_prmtop_charge > 0 else "Na+"
+        n_ions = round(abs(complex_prmtop_charge))
+        ion_lines = f"addIons2 com {ion} {n_ions}\n"
+    return f"""
+{ion_lines}
+solvatebox com {water_model} {padding}
+saveamberparm com protein_complex_solvated.prmtop protein_complex_solvated.inpcrd
+"""
+def protein_mask_from_prmtop(prmtop_path: str) -> str:
+    import parmed as pmd
+    parm = pmd.load_file(prmtop_path)
+    protein_residues = [r.idx + 1 for r in parm.residues if r.name not in ("WAT", "Na+", "Cl-")]
+    return f":1-{max(protein_residues)}"
