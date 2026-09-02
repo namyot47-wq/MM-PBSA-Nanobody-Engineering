@@ -1,0 +1,32 @@
+# config.yaml
+run_id: run_001
+input_pdb: inputs/protein_complex.pdb
+
+#Strip any non-protein resdiues
+strip_hetero: true
+strip_waters: true
+
+#Splitting the protein_complex into chain A and B
+receptor_chain: A
+ligand_chain: B
+
+#Forcefield:
+forcefield: leaprc.protein.ff14SB
+water_model: TIP3PBOX
+box_padding_ang: 12.0 #derived from tutorial
+
+#Equilibration parameters
+restraint_weight: 10.0
+heat1_steps: 25000            
+target_temp: 300.0
+heat2_taup: 1.0
+heat3_taup: 2.0
+equil_ps: 500
+
+#Production
+production_ns: 100 #run-time parameter 
+random_seed: -1 #ensures reproducability by using -1 value stated in tutorial
+
+#Convergence threshold
+density_tol_pct: 1.0
+rmsd_slope_tol: 0.0005
