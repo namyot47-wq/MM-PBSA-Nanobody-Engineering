@@ -7,8 +7,8 @@ strip_hetero: true
 strip_waters: true
 
 #Splitting the protein_complex into chain A and B
-receptor_chain: A
-ligand_chain: B
+receptor_chain: B 
+ligand_chain: A #nanobody
 
 #Forcefield:
 forcefield: leaprc.protein.ff14SB
