@@ -1,0 +1,12 @@
+#equilibrium_templates/prod.in.j2  
+#Allows for changes for all equilibrium_templates from one file
+
+Production MD, {{ production_ns }} ns segment
+ &cntrl
+  imin=0, irest=1, ntx=5,
+  ntb=2, cut=8.0, ntc=2, ntf=2,
+  temp0={{ target_temp }}, ntt=3, gamma_ln=2.0, ig=-1, #Make sure ig=-1 so that a random seed is generated each run
+  ntp=1, taup=2.0, pres0=1.0,
+  nstlim={{ (production_ns * 500000) | int }}, dt=0.002,
+  ntpr=1000, ntwx=1000, ntwr=5000,
+ /
