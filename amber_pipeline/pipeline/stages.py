@@ -30,3 +30,10 @@ def run_full_equilibration(prmtop, solvated_inpcrd, work_dir: Path):
     equil_rst  = run_sander("equil",   "equil.in",   prmtop, str(density_rst),
                              write_traj=True, work_dir=work_dir)
     return equil_rst
+#Final stage of the pipeline where trajectories are calculated from equlibrated complexes
+def run_production(prmtop, equil_rst, mdin, work_dir, n_segments=1):
+    prev_rst = equil_rst
+    for i in range(n_segments):
+        prev_rst = run_sander(f"prod_{i:03d}", mdin, prmtop, str(prev_rst),
+                               write_traj=True, work_dir=work_dir)
+    return prev_rst
