@@ -1,66 +1,41 @@
-# pipeline/prep.py
+import yaml
 from pathlib import Path
-from Bio.PDB import PDBParser, PDBIO, Select
+from pipeline import prep, render, stages, convergence
 
-def strip_hetero(input_pdb: Path, output_pdb: Path, keep: list[str] = None):
-    keep = keep or []
-    parser = PDBParser(QUIET=True)
-    structure = parser.get_structure("complex", str(input_pdb))
+def main(config_path="config.yaml"):
+    cfg = yaml.safe_load(Path(config_path).read_text())
+    work_dir = Path("work") / cfg["run_id"]
+    work_dir.mkdir(parents=True, exist_ok=True)
 
-    class ProteinOnly(Select):
-        def accept_residue(self, residue):
-            if residue.id[0] == " ":
-                return True
-            return residue.resname in keep
-    io = PDBIO()
-    io.set_structure(structure)
-    io.save(str(output_pdb), ProteinOnly())     
-def write_tleap_script(complex_pdb, forcefield, water_model, box_padding, out_dir: Path):
-    script = f"""
-source {forcefield}
-source leaprc.water.tip3p
+    #Tutorial step 1: Prepping of complex, receptor and ligand
+    clean_pdb = work_dir / "01_prep" / "protein_complex_clean.pdb"
+    prep.strip_hetero(Path(cfg["input_pdb"]), clean_pdb, cfg["keep_residues"])
+    protein_mask = prep.protein_mask_from_prmtop(str(work_dir / "protein_complex_solvated.prmtop"))
 
-com = loadpdb {complex_pdb}
+    #Tutorial step 2: From TLEAP, render the pdb inputs and equlibrate
+    ctx = {**cfg, "protein_mask": protein_mask}
+    for tmpl, out in [("min.in.j2", "min.in"), ("heat1.in.j2", "heat1.in"),
+                       ("density.in.j2", "density.in"), ("equil.in.j2", "equil.in")]:
+        render.render_input(tmpl, ctx, str(work_dir / out))
 
-receptor = com 
-ligand = com
+    equil_rst = stages.run_full_equilibration(
+        str(work_dir / "protein_complex_solvated.prmtop"),
+        str(work_dir / "protein_complex_solvated.inpcrd"),
+        work_dir,
+    )
 
-set default PBRadii mbondi2
+    convergence.check_equilibration(
+        str(work_dir / "equil.out"),
+        str(work_dir / "protein_complex_solvated.prmtop"),
+        str(work_dir / "equil.mdcrd"),
+        str(work_dir / "protein_complex_solvated.inpcrd"),
+        cfg,
+    )
 
-saveamberparm com {out_dir}/protein_complex_gas.prmtop {out_dir}/protein_complex_gas.inpcrd
+    render.render_input("prod.in.j2", ctx, str(work_dir / "prod.in"))
+    stages.run_production(str(work_dir / "protein_complex_solvated.prmtop"), equil_rst,
+                           str(work_dir / "prod.in"), work_dir,
+                           n_segments=cfg.get("n_prod_segments", 1))
 
-charge com
-"""
-    (out_dir / "tleap.in").write_text(script)
-    return out_dir / "tleap.in"
-
-def parmed_split_complex(complex_prmtop, complex_inpcrd, receptor_mask, ligand_mask, out_dir):
-    import parmed as pmd
-
-    complex_parm = pmd.load_file(str(complex_prmtop), str(complex_inpcrd))
-
-    receptor = complex_parm[receptor_mask]   
-    ligand   = complex_parm[ligand_mask]      
-
-    receptor.save(str(out_dir / "receptor_gas.prmtop"), overwrite=True)
-    receptor.save(str(out_dir / "receptor_gas.inpcrd"), overwrite=True)
-    ligand.save(str(out_dir / "ligand_gas.prmtop"), overwrite=True)
-    ligand.save(str(out_dir / "ligand_gas.inpcrd"), overwrite=True)
-
-
-def build_neutralized_solvated_script(complex_prmtop_charge: float, water_model, padding):
-    ion_lines = ""
-    if abs(complex_prmtop_charge) > 1e-3:
-        ion = "Cl-" if complex_prmtop_charge > 0 else "Na+"
-        n_ions = round(abs(complex_prmtop_charge))
-        ion_lines = f"addIons2 com {ion} {n_ions}\n"
-    return f"""
-{ion_lines}
-solvatebox com {water_model} {padding}
-saveamberparm com protein_complex_solvated.prmtop protein_complex_solvated.inpcrd
-"""
-def protein_mask_from_prmtop(prmtop_path: str) -> str:
-    import parmed as pmd
-    parm = pmd.load_file(prmtop_path)
-    protein_residues = [r.idx + 1 for r in parm.residues if r.name not in ("WAT", "Na+", "Cl-")]
-    return f":1-{max(protein_residues)}"
+if __name__ == "__main__":
+    main()
