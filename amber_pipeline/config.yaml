@@ -24,7 +24,7 @@ heat3_taup: 2.0
 equil_ps: 500
 
 #Production
-production_ns: 100 #run-time parameter 
+production_ns: 10 #run-time parameter 
 random_seed: -1 #ensures reproducability by using -1 value stated in tutorial
 
 #Convergence threshold
