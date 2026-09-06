@@ -24,9 +24,20 @@ heat3_taup: 2.0
 equil_ps: 500
 
 #Production
-production_ns: 10 #run-time parameter 
+production_ns: 100 #run-time parameter 
 random_seed: -1 #ensures reproducability by using -1 value stated in tutorial
 
 #Convergence threshold
 density_tol_pct: 1.0
 rmsd_slope_tol: 0.0005
+rmsd_stride: 10 #Checks every 10 frames for convergence
+
+#Compute Selection GPU vs CPU dependent on simulation
+use_gpu: true
+engine_equil: "pmemd.cuda"      # heat/density/equil run on GPU
+engine_prod: "pmemd.cuda"       # production runs on GPU
+min_engine_override: "sander"   # minimization forced to CPU regardless of engine_equil
+modules:                        # keep this list in sync with your sbatch scripts
+  - amber/22
+  - cuda/12.2
+  - python/3.11
