@@ -11,8 +11,9 @@ def main(config_path="config.yaml"):
     clean_pdb = work_dir / "01_prep" / "protein_complex_clean.pdb"
     clean_pdb.parent.mkdir(parents=True, exist_ok=True)
     prep.strip_hetero(Path(cfg["input_pdb"]), clean_pdb, cfg["keep_residues"])
-    protein_mask = prep.protein_mask_from_prmtop(str(work_dir / "protein_complex_solvated.prmtop"))
-
+    solvated_prmtop = prep.build_solvated_system(clean_pdb, cfg, work_dir)
+    protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
+    
     #Tutorial step 2: From TLEAP, render the pdb inputs and equlibrate
     ctx = {**cfg, "protein_mask": protein_mask}
     for tmpl, out in [("min.in.j2", "min.in"), ("heat1.in.j2", "heat1.in"),
