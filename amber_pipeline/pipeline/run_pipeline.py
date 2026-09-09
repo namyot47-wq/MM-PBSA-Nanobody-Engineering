@@ -9,6 +9,7 @@ def main(config_path="config.yaml"):
 
     #Tutorial step 1: Prepping of complex, receptor and ligand
     clean_pdb = work_dir / "01_prep" / "protein_complex_clean.pdb"
+    clean_pdb.parent.mkdir(parents=True, exist_ok=True)
     prep.strip_hetero(Path(cfg["input_pdb"]), clean_pdb, cfg["keep_residues"])
     protein_mask = prep.protein_mask_from_prmtop(str(work_dir / "protein_complex_solvated.prmtop"))
 
