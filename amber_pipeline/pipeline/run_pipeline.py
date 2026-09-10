@@ -1,67 +1,88 @@
-import argparse
 import yaml
 from pathlib import Path
 from pipeline import prep, render, stages, convergence
 
 
-def main():
-    args = parse_args()
-    cfg = yaml.safe_load(Path(args.config).read_text())
-    run_id = args.run_id or cfg["run_id"]
-    work_dir = Path("work") / run_id
-    (work_dir / "01_prep").mkdir(parents=True, exist_ok=True)
-    work_dir.mkdir(parents=True, exist_ok=True)
+def main(config_path="config.yaml"):
+    cfg = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
 
+    #1 Directory Setup:
+    work_dir = Path("work") / cfg["run_id"]
+    prep_dir = work_dir / "01_prep"
+    equil_dir = work_dir / "02_equilibration"
+    prod_dir = work_dir / "03_production"
+
+    for d in (prep_dir, equil_dir, prod_dir):
+        d.mkdir(parents=True, exist_ok=True)
+    
     #Tutorial step 1: Prepping of complex, receptor and ligand
-    clean_pdb = work_dir / "01_prep" / "protein_complex_clean.pdb"
-    clean_pdb.parent.mkdir(parents=True, exist_ok=True)
-    prep.strip_hetero(Path(cfg["input_pdb"]), clean_pdb, cfg["keep_residues"])
-    solvated_prmtop = prep.build_solvated_system(clean_pdb, cfg, work_dir)
-    protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
+    clean_pdb = prep_dir / "protein_complex_clean.pdb"
+    prep.strip_hetero(Path(cfg["input_pdb"]).resolve(), clean_pdb, cfg["keep_residues"])
 
-    if step == "prep":
-        print(f"Prep complete. Solvated system written to: {solvated_prmtop}")
-        return
+    # First tleap pass: Build gas-phase complex topology, report charge
+    tleap_in = prep.write_tleap_script(
+        clean_pdb.name, cfg["forcefield"], cfg["water_model"], cfg["box_padding_ang"], prep_dir
+    )
+    tleap_stdout = prep.run_tleap(tleap_in, cwd=prep_dir)
+    charge = prep.parse_tleap_charge(tleap_stdout)
+    print(f"[prep] tleap-reported net charge: {charge}")
+    # Second tleap pass: Dynamic water leaprc loading + solvate/neutralize
+    water_rc = f"leaprc.water.{cfg['water_model'].lower()}"
+    solvate_script = (
+        f"source {cfg['forcefield']}\n"
+        f"source {water_rc}\n\n"
+        f"com = loadpdb {clean_pdb.name}\n"
+        + prep.build_neutralized_solvated_script(charge, cfg["water_model"], cfg["box_padding_ang"])
+    )
+    solvate_in = prep_dir / "tleap_solvate.in"
+    solvate_in.write_text(solvate_script, encoding="utf-8")
+    prep.run_tleap(solvate_in, cwd=prep_dir)
+
+    # Split receptor/ligand gas-phase topologies
+    ranges = prep.get_chain_residue_ranges(clean_pdb)
+    receptor_mask = prep.chain_mask_from_ranges(ranges, cfg["receptor_chain"])
+    ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
+    prep.parmed_split_complex(
+        prep_dir / "protein_complex_gas.prmtop", 
+        prep_dir / "protein_complex_gas.inpcrd",
+        receptor_mask, ligand_mask, prep_dir,
+    )
+
+    solvated_prmtop = prep_dir / "protein_complex_solvated.prmtop"
+    solvated_inpcrd = prep_dir / "protein_complex_solvated.inpcrd"
+    protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
+    print(f"[prep] done. protein_mask = {protein_mask}")
 
     #Tutorial step 2: From TLEAP, render the pdb inputs and equlibrate
     ctx = {**cfg, "protein_mask": protein_mask}
-    for tmpl, out in [("min.in.j2", "min.in"), ("heat.in.j2", "heat1.in"),
-                       ("density.in.j2", "density.in"), ("equil.in.j2", "equil.in")]:
-        render.render_input(tmpl, ctx, str(work_dir / out))
+    eq_templates = [
+        ("min.in.j2", "min.in"), 
+        ("heat.in.j2", "heat.in"),
+        ("density.in.j2", "density.in"), 
+        ("equil.in.j2", "equil.in")
+    ]
+    for tmpl, out in eq_templates:
+        render.render_input(tmpl, ctx, str(equil_dir / out))
 
     equil_rst = stages.run_full_equilibration(
-        str(work_dir / "protein_complex_solvated.prmtop"),
-        str(work_dir / "protein_complex_solvated.inpcrd"),
-        work_dir,
+        str(solvated_prmtop), str(solvated_inpcrd), equil_dir, cfg
     )
-
-    if step == "equil":
-        print(f"Equilibration complete. Restart file: {equil_rst}")
-        return
 
     convergence.check_equilibration(
-        str(work_dir / "equil.out"),
-        str(work_dir / "protein_complex_solvated.prmtop"),
-        str(work_dir / "equil.mdcrd"),
-        str(work_dir / "protein_complex_solvated.inpcrd"),
-        cfg,
+        str(equil_dir / "equil.out"), str(solvated_prmtop),
+        str(equil_dir / "equil.mdcrd"), str(solvated_inpcrd), cfg,
     )
+    print("[equil] converged.")
+
+    if step == "equil":
+        print("[pipeline] Stopping after 'equil' stage as requested.")
+        return
 
     render.render_input("prod.in.j2", ctx, str(work_dir / "prod.in"))
-    stages.run_production(str(work_dir / "protein_complex_solvated.prmtop"), equil_rst,
-                           str(work_dir / "prod.in"), work_dir,
-                           n_segments=cfg.get("n_prod_segments", 1))
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the MM-PBSA nanobody prep/equil/prod pipeline")
-    parser.add_argument("--config", default="config.yaml", help="Path to config.yaml")
-    parser.add_argument(
-        "--step",
-        choices=["prep", "equil", "all"],
-        default="all",
-        help="Which stage to run through: 'prep' (clean + solvate only), "
-             "'equil' (also run equilibration), or 'all' (full pipeline through production)",
+    stages.run_production(
+        str(solvated_prmtop), str(equil_rst), str(prod_dir / "prod.in"),
+        prod_dir, cfg, n_segments=cfg.get("n_prod_segments", 1),
     )
-    args = parser.parse_args()
-    main(config_path=args.config, step=args.step)
+    print("[production] done.")
+
+
