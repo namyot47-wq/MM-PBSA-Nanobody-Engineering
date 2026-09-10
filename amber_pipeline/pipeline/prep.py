@@ -30,6 +30,7 @@ set default PBRadii mbondi2
 saveamberparm com protein_complex_gas.prmtop protein_complex_gas.inpcrd
  
 charge com
+quit
 """
     script_path = out_dir / "tleap.in"
     script_path.write_text(script)
@@ -93,6 +94,7 @@ source leaprc.water.tip3p
 com = loadpdb {clean_pdb}
 set default PBRadii mbondi2
 {solvate_block}
+exit
 """)
     run_tleap(solvate_script_path, work_dir)
  
