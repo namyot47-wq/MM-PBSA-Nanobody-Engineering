@@ -1,8 +1,10 @@
+import argparse
 import yaml
 from pathlib import Path
 from pipeline import prep, render, stages, convergence
 
-def main(config_path="config.yaml"):
+
+def main(config_path="config.yaml", step="all"):
     cfg = yaml.safe_load(Path(config_path).read_text())
     work_dir = Path("work") / cfg["run_id"]
     work_dir.mkdir(parents=True, exist_ok=True)
@@ -13,6 +15,10 @@ def main(config_path="config.yaml"):
     prep.strip_hetero(Path(cfg["input_pdb"]), clean_pdb, cfg["keep_residues"])
     solvated_prmtop = prep.build_solvated_system(clean_pdb, cfg, work_dir)
     protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
+
+    if step == "prep":
+        print(f"Prep complete. Solvated system written to: {solvated_prmtop}")
+        return
 
     #Tutorial step 2: From TLEAP, render the pdb inputs and equlibrate
     ctx = {**cfg, "protein_mask": protein_mask}
@@ -25,6 +31,10 @@ def main(config_path="config.yaml"):
         str(work_dir / "protein_complex_solvated.inpcrd"),
         work_dir,
     )
+
+    if step == "equil":
+        print(f"Equilibration complete. Restart file: {equil_rst}")
+        return
 
     convergence.check_equilibration(
         str(work_dir / "equil.out"),
@@ -39,5 +49,16 @@ def main(config_path="config.yaml"):
                            str(work_dir / "prod.in"), work_dir,
                            n_segments=cfg.get("n_prod_segments", 1))
 
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Run the MM-PBSA nanobody prep/equil/prod pipeline")
+    parser.add_argument("--config", default="config.yaml", help="Path to config.yaml")
+    parser.add_argument(
+        "--step",
+        choices=["prep", "equil", "all"],
+        default="all",
+        help="Which stage to run through: 'prep' (clean + solvate only), "
+             "'equil' (also run equilibration), or 'all' (full pipeline through production)",
+    )
+    args = parser.parse_args()
+    main(config_path=args.config, step=args.step)
