@@ -94,7 +94,7 @@ source leaprc.water.tip3p
 com = loadpdb {clean_pdb}
 set default PBRadii mbondi2
 {solvate_block}
-exit
+quit
 """)
     run_tleap(solvate_script_path, work_dir)
  

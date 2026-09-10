@@ -3,10 +3,11 @@ source leaprc.protein.ff14SB
 source leaprc.water.tip3p
  
 com = loadpdb /Users/nathanamyot/Desktop/BartelleLab/MM-PBSA-Nanobody-Engineering/amber_pipeline/work/run_001/01_prep/protein_complex_clean.pdb
- 
 set default PBRadii mbondi2
- 
-saveamberparm com protein_complex_gas.prmtop protein_complex_gas.inpcrd
- 
-charge com
-quit
+
+addIons2 com Cl- 5
+
+solvatebox com TIP3PBOX 12.0
+saveamberparm com protein_complex_solvated.prmtop protein_complex_solvated.inpcrd
+
+exit
