@@ -5,6 +5,7 @@ from pathlib import Path
 from Bio.PDB import PDBParser, PDBIO, Select
 
 def strip_hetero(input_pdb: Path, output_pdb: Path, keep: list[str] = None):
+    output_pdb.parent.mkdir(parents=True, exist_ok=True)
     keep = keep or []
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure("complex", str(input_pdb))

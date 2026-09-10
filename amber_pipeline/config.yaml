@@ -38,6 +38,9 @@ engine_equil: "pmemd.cuda"      # heat/density/equil run on GPU
 engine_prod: "pmemd.cuda"       # production runs on GPU
 min_engine_override: "sander"   # minimization forced to CPU regardless of engine_equil
 modules:                        # keep this list in sync with your sbatch scripts
-  - amber/22
-  - cuda/12.2
-  - python/3.11
+  - amber/24
+  - mamba/latest
+
+slurm_partition: "public"
+slurm_qos: "public"
+slurm_gpu_type: "a100"

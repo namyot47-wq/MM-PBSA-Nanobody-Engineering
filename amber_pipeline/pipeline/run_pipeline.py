@@ -4,9 +4,12 @@ from pathlib import Path
 from pipeline import prep, render, stages, convergence
 
 
-def main(config_path="config.yaml", step="all"):
-    cfg = yaml.safe_load(Path(config_path).read_text())
-    work_dir = Path("work") / cfg["run_id"]
+def main():
+    args = parse_args()
+    cfg = yaml.safe_load(Path(args.config).read_text())
+    run_id = args.run_id or cfg["run_id"]
+    work_dir = Path("work") / run_id
+    (work_dir / "01_prep").mkdir(parents=True, exist_ok=True)
     work_dir.mkdir(parents=True, exist_ok=True)
 
     #Tutorial step 1: Prepping of complex, receptor and ligand
