@@ -17,6 +17,7 @@ def strip_hetero(input_pdb: Path, output_pdb: Path, keep: list[str] = None):
     io = PDBIO()
     io.set_structure(structure)
     io.save(str(output_pdb), ProteinOnly())     
+
 def write_tleap_script(complex_pdb, forcefield, water_model, box_padding, out_dir: Path):
     script = f"""
 source {forcefield}
@@ -26,7 +27,7 @@ com = loadpdb {complex_pdb}
  
 set default PBRadii mbondi2
  
-saveamberparm com {out_dir}/protein_complex_gas.prmtop {out_dir}/protein_complex_gas.inpcrd
+saveamberparm com protein_complex_gas.prmtop protein_complex_gas.inpcrd
  
 charge com
 """
@@ -36,7 +37,7 @@ charge com
 
 def run_tleap(script_path: Path, work_dir: Path) -> str:
     result = subprocess.run(
-        ["tleap", "-f", str(script_path)],
+        ["tleap", "-f", str(script_path.name)],
         cwd=str(work_dir),
         capture_output=True,
         text=True,
@@ -66,6 +67,7 @@ saveamberparm com protein_complex_solvated.prmtop protein_complex_solvated.inpcr
  
  
 def build_solvated_system(clean_pdb: Path, cfg: dict, work_dir: Path) -> Path:
+    clean_pdb = clean_pdb.resolve()
     # Step 1: build gas-phase system to determine net charge
     gas_script = write_tleap_script(
         complex_pdb=str(clean_pdb),
