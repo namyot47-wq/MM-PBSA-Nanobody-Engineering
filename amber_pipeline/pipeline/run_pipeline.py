@@ -5,6 +5,7 @@ from pipeline import prep, render, stages, convergence
 
 def main(config_path="config.yaml"):
     cfg = yaml.safe_load(Path(config_path).read_text(encoding="utf-8"))
+    step = cfg.get("stop_after_stage")  
 
     #1 Directory Setup:
     work_dir = Path("work") / cfg["run_id"]
@@ -33,6 +34,7 @@ def main(config_path="config.yaml"):
         f"source {water_rc}\n\n"
         f"com = loadpdb {clean_pdb.name}\n"
         + prep.build_neutralized_solvated_script(charge, cfg["water_model"], cfg["box_padding_ang"])
+        + "quit\n"
     )
     solvate_in = prep_dir / "tleap_solvate.in"
     solvate_in.write_text(solvate_script, encoding="utf-8")
