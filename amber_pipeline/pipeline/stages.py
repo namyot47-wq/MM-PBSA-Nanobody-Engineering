@@ -16,7 +16,7 @@ def run_md_engine(stage, mdin, prmtop, in_crd, ref_crd=None, write_traj=False,
     result = subprocess.run(cmd, capture_output=True, text=True, cwd=work_dir)
     if result.returncode != 0:
         raise RuntimeError(f"[{stage}] {engine} failed:\n{result.stderr[-2000:]}")
-    if not out.exists() or "Total wall time" not in out.read_text():
+    if not out.exists() or "Total time" not in out.read_text():
         raise RuntimeError(f"[{stage}] did not finish cleanly, check {out}")
     return rst
 #pulls files from the equilibrium_templates to run equlibritaion of complex,ligand and receptor.
