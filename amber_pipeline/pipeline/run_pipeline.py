@@ -57,7 +57,7 @@ def run_equil(cfg, prep_dir, equil_dir):
     if not solvated_prmtop.exists():
         sys.exit(f"[equil] missing {solvated_prmtop} — run --step prep first")
 
-    protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
+    protein_mask = prep.protein_mask_from_prmtop(str(prep_dir / "protein_complex_solvated.prmtop"))
     ctx = {**cfg, "protein_mask": protein_mask}
     eq_templates = [
         ("min.in.j2", "min.in"),
