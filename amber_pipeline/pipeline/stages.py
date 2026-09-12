@@ -22,7 +22,7 @@ def run_md_engine(stage, mdin, prmtop, in_crd, ref_crd=None, write_traj=False,
 #pulls files from the equilibrium_templates to run equlibritaion of complex,ligand and receptor.
 def run_full_equilibration(prmtop, solvated_inpcrd, work_dir: Path):
     min_rst    = run_md_engine("min",     "min.in",     prmtop, solvated_inpcrd,
-                             ref_crd=solvated_inpcrd, work_dir=work_dir)
+                             ref_crd=solvated_inpcrd, work_dir=work_dir, engine="sander")
     heat_rst   = run_md_engine("heat",    "heat1.in",   prmtop, str(min_rst),
                              ref_crd=str(min_rst), write_traj=True, work_dir=work_dir)
     density_rst = run_md_engine("density","density.in", prmtop, str(heat_rst),
