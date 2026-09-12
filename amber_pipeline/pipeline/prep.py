@@ -114,7 +114,8 @@ def parmed_split_complex(complex_prmtop, complex_inpcrd, receptor_mask, ligand_m
     receptor.save(str(out_dir / "receptor_gas.inpcrd"), overwrite=True)
     ligand.save(str(out_dir / "ligand_gas.prmtop"), overwrite=True)
     ligand.save(str(out_dir / "ligand_gas.inpcrd"), overwrite=True)
-
+    receptor.save(str(out_dir / "receptor.pdb"), overwrite=True)
+    ligand.save(str(out_dir / "ligand.pdb"), overwrite=True)
 def protein_mask_from_prmtop(prmtop_path: str) -> str:
     import parmed as pmd
     parm = pmd.load_file(prmtop_path)
