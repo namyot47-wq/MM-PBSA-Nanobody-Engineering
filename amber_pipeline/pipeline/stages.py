@@ -1,10 +1,9 @@
-#pipeline/stages.py
 import subprocess
 from pathlib import Path
 
 #This mirrors the four commands used in the amber tutorial
-def run_md_engine(stage, mdin, prmtop, in_crd, ref_crd=None, write_traj=False, 
-                  work_dir=Path("."), engine="pmed.cuda"):
+def run_md_engine(stage, mdin, prmtop, in_crd, ref_crd=None, write_traj=False,
+                  work_dir=Path("."), engine="pmemd.cuda"):
     out = work_dir / f"{stage}.out"
     rst = work_dir / f"{stage}.rst"
     cmd = [engine, "-O", "-i", mdin, "-o", str(out),
@@ -23,7 +22,7 @@ def run_md_engine(stage, mdin, prmtop, in_crd, ref_crd=None, write_traj=False,
 def run_full_equilibration(prmtop, solvated_inpcrd, work_dir: Path):
     min_rst    = run_md_engine("min",     "min.in",     prmtop, solvated_inpcrd,
                              ref_crd=solvated_inpcrd, work_dir=work_dir, engine="sander")
-    heat_rst   = run_md_engine("heat",    "heat1.in",   prmtop, str(min_rst),
+    heat_rst   = run_md_engine("heat",    "heat.in",    prmtop, str(min_rst),
                              ref_crd=str(min_rst), write_traj=True, work_dir=work_dir)
     density_rst = run_md_engine("density","density.in", prmtop, str(heat_rst),
                              ref_crd=str(heat_rst), write_traj=True, work_dir=work_dir)

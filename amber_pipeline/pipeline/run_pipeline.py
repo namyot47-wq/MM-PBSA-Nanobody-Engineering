@@ -26,12 +26,12 @@ def run_prep(cfg, prep_dir):
     charge = prep.parse_tleap_charge(tleap_stdout)
     print(f"[prep] tleap-reported net charge: {charge}")
 
-    water_rc = f"leaprc.water.{cfg['water_model'].lower()}"
+    water_rc = f"leaprc.water.{cfg['water_model']}"
     solvate_script = (
         f"source {cfg['forcefield']}\n"
         f"source {water_rc}\n\n"
         f"com = loadpdb {clean_pdb.name}\n"
-        + prep.build_neutralized_solvated_script(charge, cfg["water_model"], cfg["box_padding_ang"])
+        + prep.build_neutralized_solvated_script(charge, cfg["water_box"], cfg["box_padding_ang"])
         + "quit\n"
     )
     solvate_in = prep_dir / "tleap_solvate.in"
@@ -57,7 +57,7 @@ def run_equil(cfg, prep_dir, equil_dir):
     if not solvated_prmtop.exists():
         sys.exit(f"[equil] missing {solvated_prmtop} — run --step prep first")
 
-    protein_mask = prep.protein_mask_from_prmtop(str(prep_dir / "protein_complex_solvated.prmtop"))
+    protein_mask = prep.protein_mask_from_prmtop(str(solvated_prmtop))
     ctx = {**cfg, "protein_mask": protein_mask}
     eq_templates = [
         ("min.in.j2", "min.in"),
@@ -112,4 +112,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

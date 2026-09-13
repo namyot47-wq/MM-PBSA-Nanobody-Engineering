@@ -12,7 +12,8 @@ ligand_chain: A #nanobody
 
 #Forcefield:
 forcefield: leaprc.protein.ff14SB
-water_model: TIP3PBOX
+water_model: tip3p
+water_box: TIP3PBOX
 box_padding_ang: 12.0 #derived from tutorial
 
 #Equilibration parameters

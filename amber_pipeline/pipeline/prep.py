@@ -1,4 +1,3 @@
-# pipeline/prep.py
 import re
 import subprocess
 from pathlib import Path
@@ -17,19 +16,19 @@ def strip_hetero(input_pdb: Path, output_pdb: Path, keep: list[str] = None):
             return residue.resname in keep
     io = PDBIO()
     io.set_structure(structure)
-    io.save(str(output_pdb), ProteinOnly())     
+    io.save(str(output_pdb), ProteinOnly())
 
 def write_tleap_script(complex_pdb, forcefield, water_model, box_padding, out_dir: Path):
     script = f"""
 source {forcefield}
-source leaprc.water.tip3p
- 
+source leaprc.water.{water_model}
+
 com = loadpdb {complex_pdb}
- 
+
 set default PBRadii mbondi2
- 
+
 saveamberparm com protein_complex_gas.prmtop protein_complex_gas.inpcrd
- 
+
 charge com
 quit
 """
@@ -53,9 +52,9 @@ def parse_tleap_charge(tleap_stdout: str) -> float:
     if not match:
         raise ValueError("Could not find total charge in tleap output")
     return float(match.group(1))
- 
- 
-def build_neutralized_solvated_script(complex_prmtop_charge: float, water_model, padding):
+
+
+def build_neutralized_solvated_script(complex_prmtop_charge: float, water_box, padding):
     ion_lines = ""
     if abs(complex_prmtop_charge) > 1e-3:
         ion = "Cl-" if complex_prmtop_charge > 0 else "Na+"
@@ -63,11 +62,11 @@ def build_neutralized_solvated_script(complex_prmtop_charge: float, water_model,
         ion_lines = f"addIons2 com {ion} {n_ions}\n"
     return f"""
 {ion_lines}
-solvatebox com {water_model} {padding}
+solvatebox com {water_box} {padding}
 saveamberparm com protein_complex_solvated.prmtop protein_complex_solvated.inpcrd
 """
- 
- 
+
+
 def build_solvated_system(clean_pdb: Path, cfg: dict, work_dir: Path) -> Path:
     clean_pdb = clean_pdb.resolve()
     # Step 1: build gas-phase system to determine net charge
@@ -80,35 +79,56 @@ def build_solvated_system(clean_pdb: Path, cfg: dict, work_dir: Path) -> Path:
     )
     gas_stdout = run_tleap(gas_script, work_dir)
     charge = parse_tleap_charge(gas_stdout)
- 
+
     # Step 2: build solvated + neutralized system using that charge
     solvate_block = build_neutralized_solvated_script(
         complex_prmtop_charge=charge,
-        water_model=cfg["water_model"],
+        water_box=cfg["water_box"],
         padding=cfg["box_padding_ang"],
     )
     solvate_script_path = work_dir / "tleap_solvate.in"
     solvate_script_path.write_text(f"""
 source {cfg["forcefield"]}
-source leaprc.water.tip3p
- 
+source leaprc.water.{cfg["water_model"]}
+
 com = loadpdb {clean_pdb}
 set default PBRadii mbondi2
 {solvate_block}
 quit
 """)
     run_tleap(solvate_script_path, work_dir)
- 
+
     return work_dir / "protein_complex_solvated.prmtop"
- 
+
+
+def get_chain_residue_ranges(pdb_path: Path) -> dict[str, tuple[int, int]]:
+    """Return {chain_id: (first_resnum, last_resnum)} from the PDB's own numbering.
+    Assumes tleap preserves this numbering contiguously in the output prmtop."""
+    parser = PDBParser(QUIET=True)
+    structure = parser.get_structure("complex", str(pdb_path))
+    ranges = {}
+    for chain in structure[0]:
+        resnums = [res.id[1] for res in chain if res.id[0] == " "]
+        if resnums:
+            ranges[chain.id] = (min(resnums), max(resnums))
+    return ranges
+
+
+def chain_mask_from_ranges(ranges: dict[str, tuple[int, int]], chain_id: str) -> str:
+    """Build an Amber residue mask (e.g. ':1-250') for a given chain."""
+    if chain_id not in ranges:
+        raise KeyError(f"Chain '{chain_id}' not found in {sorted(ranges)}")
+    start, end = ranges[chain_id]
+    return f":{start}-{end}"
+
 
 def parmed_split_complex(complex_prmtop, complex_inpcrd, receptor_mask, ligand_mask, out_dir):
     import parmed as pmd
 
     complex_parm = pmd.load_file(str(complex_prmtop), str(complex_inpcrd))
 
-    receptor = complex_parm[receptor_mask]   
-    ligand   = complex_parm[ligand_mask]      
+    receptor = complex_parm[receptor_mask]
+    ligand   = complex_parm[ligand_mask]
 
     receptor.save(str(out_dir / "receptor_gas.prmtop"), overwrite=True)
     receptor.save(str(out_dir / "receptor_gas.inpcrd"), overwrite=True)
@@ -116,6 +136,7 @@ def parmed_split_complex(complex_prmtop, complex_inpcrd, receptor_mask, ligand_m
     ligand.save(str(out_dir / "ligand_gas.inpcrd"), overwrite=True)
     receptor.save(str(out_dir / "receptor.pdb"), overwrite=True)
     ligand.save(str(out_dir / "ligand.pdb"), overwrite=True)
+
 def protein_mask_from_prmtop(prmtop_path: str) -> str:
     import parmed as pmd
     parm = pmd.load_file(prmtop_path)
