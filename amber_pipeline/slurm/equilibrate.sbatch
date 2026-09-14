@@ -8,6 +8,7 @@
 #SBATCH -o slurm_logs/equil_%j.out
 #SBATCH -e slurm_logs/equil_%j.err
 
+modudle load mamba/latest
 module load amber/24
 source activate amber_pipeline
 
