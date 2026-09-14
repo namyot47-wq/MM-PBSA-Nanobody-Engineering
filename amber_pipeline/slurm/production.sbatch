@@ -8,6 +8,7 @@
 #SBATCH -o slurm_logs/prod_%j.out
 #SBATCH -e slurm_logs/prod_%j.err
 
+module load mamba/latest
 module load amber/24
 source activate amber_pipeline
 
