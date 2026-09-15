@@ -1,4 +1,5 @@
 import subprocess
+from unittest import result
 import numpy as np
 import re
 from pathlib import Path
@@ -28,14 +29,16 @@ def strided_rmsd(prmtop: str, traj: str, ref: str, mask: str = "@CA,C,N",
     cpptraj_in = f"""
 parm {prmtop}
 trajin {traj} 1 last {stride}
-rms ToRef {ref} {mask} out rmsd_check.dat
+rms ToRef ref {ref} {mask} out rmsd_check.dat
 """
     script_path = f"{work_dir}/rmsd_check.cpptraj"
     with open(script_path, "w") as f:
         f.write(cpptraj_in)
 
-    subprocess.run(["cpptraj", "-i", script_path], check=True, cwd=work_dir,
-                    capture_output=True, text=True)
+    result = subprocess.run(["cpptraj", "-i", script_path], cwd=work_dir,
+                         capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"cpptraj failed:\n{result.stdout}\n{result.stderr}")
 
     rmsd_values = []
     with open(f"{work_dir}/rmsd_check.dat") as f:
