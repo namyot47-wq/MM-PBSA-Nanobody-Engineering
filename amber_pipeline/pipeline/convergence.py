@@ -28,8 +28,9 @@ def strided_rmsd(prmtop: str, traj: str, ref: str, mask: str = "@CA,C,N",
                   stride: int = 10, work_dir: str = ".") -> list[float]:
     cpptraj_in = f"""
 parm {prmtop}
+reference {ref}
 trajin {traj} 1 last {stride}
-rms ToRef ref {ref} {mask} out rmsd_check.dat
+rms ToRef reference {mask} out rmsd_check.dat
 """
     script_path = f"{work_dir}/rmsd_check.cpptraj"
     with open(script_path, "w") as f:
