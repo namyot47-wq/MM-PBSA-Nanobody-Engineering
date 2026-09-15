@@ -22,7 +22,7 @@ heat1_steps: 25000
 target_temp: 300.0
 heat2_taup: 1.0
 heat3_taup: 2.0
-equil_ps: 3000 #Equilibrium time constraint
+equil_ps: 4000 #Equilibrium time constraint
 
 #Production
 production_ns: 100 #run-time parameter 
