@@ -9,6 +9,8 @@ def parse_sander_out(out_file: str, key: str) -> list[float]:
     pattern = re.compile(rf"\b{key}\b\s*=\s*(-?\d+\.\d+)")
     with open(out_file) as f:
         for line in f:
+            if "A V E R A G E S" in line or "R M S  F L U C T U A T I O N S" in line:
+                break
             m = pattern.search(line)
             if m:
                 values.append(float(m.group(1)))
