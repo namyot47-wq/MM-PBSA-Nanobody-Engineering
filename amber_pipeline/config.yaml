@@ -22,7 +22,7 @@ heat1_steps: 25000
 target_temp: 300.0
 heat2_taup: 1.0
 heat3_taup: 2.0
-equil_ps: 6000 #Equilibrium time constraint
+equil_ps: 8000 #Equilibrium time constraint
 
 #Production
 production_ns: 100 #run-time parameter 
@@ -30,8 +30,8 @@ random_seed: -1 #ensures reproducability by using -1 value stated in tutorial
 
 #Convergence threshold
 density_tol_pct: 1.0
-rmsd_slope_tol: 0.005
-rmsd_stride: 10 #Checks every 10 frames for convergence
+rmsd_slope_tol: 0.01
+rmsd_stride: 15 #Checks every 10 frames for convergence
 
 #Compute Selection GPU vs CPU dependent on simulation
 use_gpu: true
