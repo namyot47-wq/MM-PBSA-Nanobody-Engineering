@@ -31,7 +31,7 @@ random_seed: -1 #ensures reproducability by using -1 value stated in tutorial
 #Convergence threshold
 density_tol_pct: 1.0
 rmsd_slope_tol: 0.01
-rmsd_stride: 15 #Checks every 10 frames for convergence
+rmsd_stride: 15 #Checks every nth frames for convergence
 
 #Compute Selection GPU vs CPU dependent on simulation
 use_gpu: true
