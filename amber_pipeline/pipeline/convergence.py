@@ -53,7 +53,7 @@ rms ToRef reference {mask} out rmsd_check.dat
 def is_rmsd_plateaued(prmtop: str, traj: str, ref: str, slope_tol: float = 0.005,
                        stride: int = 10, work_dir: str = ".") -> bool:
     rmsd = strided_rmsd(prmtop, traj, ref, stride=stride, work_dir=work_dir)
-    tail = rmsd[int(len(rmsd) * 0.8):] #Looks at last 20% of rmsd data to determine convergence
+    tail = rmsd[int(len(rmsd) * 0.9):] #Looks at last 20% of rmsd data to determine convergence
     slope = np.polyfit(range(len(tail)), tail, 1)[0]
     return abs(slope) < slope_tol
 
