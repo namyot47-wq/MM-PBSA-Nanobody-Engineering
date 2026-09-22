@@ -45,3 +45,11 @@ modules:                        # keep this list in sync with your sbatch script
 slurm_partition: "public"
 slurm_qos: "public"
 slurm_gpu_type: "a100"
+
+mmpbsa:
+  start_frame: 1
+  end_frame: last
+  interval: 1
+  igb: 5
+  saltcon: 0.15
+  

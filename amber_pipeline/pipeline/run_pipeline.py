@@ -1,6 +1,7 @@
 import argparse
 import sys
 import yaml
+import subprocess
 from pathlib import Path
 from pipeline import prep, render, stages, convergence
 
@@ -10,9 +11,10 @@ def build_dirs(cfg):
     prep_dir = (work_dir / "01_prep").resolve()
     equil_dir = (work_dir / "02_equilibration").resolve()
     prod_dir = (work_dir / "03_production").resolve()
-    for d in (prep_dir, equil_dir, prod_dir):
+    mmpbsa_dir = (work_dir / "04_mmpbsa").resolve()
+    for d in (prep_dir, equil_dir, prod_dir, mmpbsa_dir):
         d.mkdir(parents=True, exist_ok=True)
-    return work_dir.resolve(), prep_dir, equil_dir, prod_dir
+    return work_dir.resolve(), prep_dir, equil_dir, prod_dir, mmpbsa_dir
 
 
 def run_prep(cfg, prep_dir):
@@ -92,15 +94,83 @@ def run_production(cfg, prep_dir, equil_dir, prod_dir):
     )
     print("[production] done.")
 
+def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
+    import configparser
+
+    complex_gas_prmtop = prep_dir / "protein_complex_gas.prmtop"
+    receptor_gas_prmtop = prep_dir / "receptor_gas.prmtop"
+    ligand_gas_prmtop = prep_dir / "ligand_gas.prmtop"
+    for p in (complex_gas_prmtop, receptor_gas_prmtop, ligand_gas_prmtop):
+        if not p.exists():
+            sys.exit(f"[mmpbsa] missing {p} — run --step prep first")
+
+    prod_segments = sorted(prod_dir.glob("prod_*.mdcrd"))
+    if not prod_segments:
+        sys.exit(f"[mmpbsa] no prod_*.mdcrd files found in {prod_dir} — run --step production first")
+
+    # 1. Concatenate all production segments into one trajectory
+    combined_traj = mmpbsa_dir / "production_full.nc"
+    cat_script = mmpbsa_dir / "concat.cpptraj"
+    cat_script.write_text(
+        f"parm {complex_gas_prmtop}\n"
+        + "".join(f"trajin {seg}\n" for seg in prod_segments)
+        + f"trajout {combined_traj}\n"
+        + "go\n"
+    )
+    result = subprocess.run(["cpptraj", "-i", str(cat_script)], cwd=mmpbsa_dir,
+                             capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"cpptraj concat failed:\n{result.stdout}\n{result.stderr}")
+
+    # 2. Re-derive receptor/ligand masks the same way run_prep did
+    clean_pdb = prep_dir / "protein_complex_clean.pdb"
+    ranges = prep.get_chain_residue_ranges(clean_pdb)
+    receptor_mask = prep.chain_mask_from_ranges(ranges, cfg["receptor_chain"])
+    ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
+
+    # 3. Write the ini-style config mmpbsa.py expects, from config.yaml's [mmpbsa] block
+    mm = cfg.get("mmpbsa", {})
+    ini = configparser.ConfigParser()
+    ini["general"] = {
+        "start_frame": str(mm.get("start_frame", 1)),
+        "end_frame": str(mm.get("end_frame", "last")),
+        "interval": str(mm.get("interval", 1)),
+    }
+    ini["gb"] = {
+        "igb": str(mm.get("igb", 5)),
+        "saltcon": str(mm.get("saltcon", 0.15)),
+    }
+    ini_path = mmpbsa_dir / "mmpbsa.ini"
+    with open(ini_path, "w") as f:
+        ini.write(f)
+
+    # 4. Call mmpbsa.py
+    script_path = Path(__file__).parent.parent / "mmpbsa.py"
+    cmd = [
+        sys.executable, str(script_path),
+        "--complex-prmtop", str(complex_gas_prmtop),
+        "--receptor-prmtop", str(receptor_gas_prmtop),
+        "--ligand-prmtop", str(ligand_gas_prmtop),
+        "--trajectory", str(combined_traj),
+        "--receptor-mask", receptor_mask,
+        "--ligand-mask", ligand_mask,
+        "--config", str(ini_path),
+        "--outdir", str(mmpbsa_dir),
+    ]
+    result = subprocess.run(cmd, cwd=mmpbsa_dir, capture_output=True, text=True)
+    print(result.stdout)
+    if result.returncode != 0:
+        raise RuntimeError(f"mmpbsa.py failed:\n{result.stdout}\n{result.stderr}")
+    print("[mmpbsa] done.")
 
 def main():
     parser = argparse.ArgumentParser(description="AMBER MM-PBSA pipeline")
     parser.add_argument("config_path", nargs="?", default="config.yaml")
-    parser.add_argument("--step", choices=["prep", "equil", "production", "all"], default="all")
+    parser.add_argument("--step", choices=["prep", "equil", "production", "mmpbsa", "all"], default="all")
     args = parser.parse_args()
 
     cfg = yaml.safe_load(Path(args.config_path).read_text(encoding="utf-8"))
-    _work_dir, prep_dir, equil_dir, prod_dir = build_dirs(cfg)
+    _work_dir, prep_dir, equil_dir, prod_dir, mmpbsa_dir = build_dirs(cfg)
 
     if args.step in ("prep", "all"):
         run_prep(cfg, prep_dir)
@@ -108,6 +178,8 @@ def main():
         run_equil(cfg, prep_dir, equil_dir)
     if args.step in ("production", "all"):
         run_production(cfg, prep_dir, equil_dir, prod_dir)
+    if args.step in ("mmpbsa", "all"):
+        run_mmpbsa(cfg, prep_dir, equil_dir, prod_dir, mmpbsa_dir)
 
 
 if __name__ == "__main__":
