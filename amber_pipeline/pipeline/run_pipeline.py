@@ -109,10 +109,11 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
         sys.exit(f"[mmpbsa] no prod_*.mdcrd files found in {prod_dir} — run --step production first")
 
     # 1. Concatenate all production segments into one trajectory
+    solvated_prmtop = prep_dir / "protein_complex_solvated.prmtop"
     combined_traj = mmpbsa_dir / "production_full.nc"
     cat_script = mmpbsa_dir / "concat.cpptraj"
     cat_script.write_text(
-        f"parm {complex_gas_prmtop}\n"
+        f"parm {solvated_prmtop}\n"
         + "".join(f"trajin {seg}\n" for seg in prod_segments)
         + f"trajout {combined_traj}\n"
         + "go\n"
@@ -179,7 +180,7 @@ def main():
     if args.step in ("production", "all"):
         run_production(cfg, prep_dir, equil_dir, prod_dir)
     if args.step in ("mmpbsa", "all"):
-        run_mmpbsa(cfg, prep_dir, equil_dir, prod_dir, mmpbsa_dir)
+        run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir)
 
 
 if __name__ == "__main__":
