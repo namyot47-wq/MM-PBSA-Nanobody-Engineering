@@ -179,7 +179,7 @@ def main():
     if args.step in ("production", "all"):
         run_production(cfg, prep_dir, equil_dir, prod_dir)
     if args.step in ("mmpbsa", "all"):
-        run_mmpbsa(cfg, prep_dir, equil_dir, prod_dir, mmpbsa_dir)
+        run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir)
 
 
 if __name__ == "__main__":
