@@ -97,10 +97,11 @@ def run_production(cfg, prep_dir, equil_dir, prod_dir):
 def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     import configparser
 
+    solvated_prmtop = prep_dir / "protein_complex_solvated.prmtop"
     complex_gas_prmtop = prep_dir / "protein_complex_gas.prmtop"
     receptor_gas_prmtop = prep_dir / "receptor_gas.prmtop"
     ligand_gas_prmtop = prep_dir / "ligand_gas.prmtop"
-    for p in (complex_gas_prmtop, receptor_gas_prmtop, ligand_gas_prmtop):
+    for p in (solvated_prmtop,complex_gas_prmtop, receptor_gas_prmtop, ligand_gas_prmtop):
         if not p.exists():
             sys.exit(f"[mmpbsa] missing {p} — run --step prep first")
 
@@ -108,12 +109,20 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     if not prod_segments:
         sys.exit(f"[mmpbsa] no prod_*.mdcrd files found in {prod_dir} — run --step production first")
 
-    # 1. Concatenate all production segments into one trajectory
+    # 1. Re-derive receptor/ligand masks the same way run_prep did
+    clean_pdb = prep_dir / "protein_complex_clean.pdb"
+    ranges = prep.get_chain_residue_ranges(clean_pdb)
+    receptor_mask = prep.chain_mask_from_ranges(ranges, cfg["receptor_chain"])
+    ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
+    
+    # 2. Concatenate all production segments into one trajectory
     combined_traj = mmpbsa_dir / "production_full.nc"
     cat_script = mmpbsa_dir / "concat.cpptraj"
     cat_script.write_text(
-        f"parm {complex_gas_prmtop}\n"
+        f"parm {solvated_prmtop}\n"
         + "".join(f"trajin {seg}\n" for seg in prod_segments)
+        + "autoimage\n"
+        + f"strip !({receptor_mask}|{ligand_mask})\n"
         + f"trajout {combined_traj}\n"
         + "go\n"
     )
@@ -122,11 +131,7 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     if result.returncode != 0:
         raise RuntimeError(f"cpptraj concat failed:\n{result.stdout}\n{result.stderr}")
 
-    # 2. Re-derive receptor/ligand masks the same way run_prep did
-    clean_pdb = prep_dir / "protein_complex_clean.pdb"
-    ranges = prep.get_chain_residue_ranges(clean_pdb)
-    receptor_mask = prep.chain_mask_from_ranges(ranges, cfg["receptor_chain"])
-    ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
+    
 
     # 3. Write the ini-style config mmpbsa.py expects, from config.yaml's [mmpbsa] block
     mm = cfg.get("mmpbsa", {})
