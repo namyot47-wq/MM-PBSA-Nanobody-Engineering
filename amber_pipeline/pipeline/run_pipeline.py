@@ -129,12 +129,31 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     receptor_mask = prep.chain_mask_from_ranges(ranges, cfg["receptor_chain"])
     ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
 
+    # 2b. Determine the actual frame count of the concatenated trajectory,
+    #     since mmpbsa.py's configparser.getint() cannot accept "last".
+    import re as _re
+    frame_count_result = subprocess.run(
+        ["cpptraj", "-p", str(solvated_prmtop), "-y", str(combined_traj), "-tl"],
+        capture_output=True, text=True,
+    )
+    _m = _re.search(r"Frames:\s*(\d+)", frame_count_result.stdout)
+    if not _m:
+        raise RuntimeError(
+            f"[mmpbsa] could not determine frame count of {combined_traj}:\n"
+            f"{frame_count_result.stdout}\n{frame_count_result.stderr}"
+        )
+    total_frames = int(_m.group(1))
+    print(f"[mmpbsa] concatenated trajectory has {total_frames} frames")
+
     # 3. Write the ini-style config mmpbsa.py expects, from config.yaml's [mmpbsa] block
     mm = cfg.get("mmpbsa", {})
+    configured_end = mm.get("end_frame", "last")
+    end_frame = total_frames if configured_end in (None, "last") else int(configured_end)
+
     ini = configparser.ConfigParser()
     ini["general"] = {
         "start_frame": str(mm.get("start_frame", 1)),
-        "end_frame": str(mm.get("end_frame", "last")),
+        "end_frame": str(end_frame),
         "interval": str(mm.get("interval", 1)),
     }
     ini["gb"] = {
@@ -150,6 +169,7 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     cmd = [
         sys.executable, str(script_path),
         "--complex-prmtop", str(complex_gas_prmtop),
+        "--complex-solvated-prmtop", str(solvated_prmtop),
         "--receptor-prmtop", str(receptor_gas_prmtop),
         "--ligand-prmtop", str(ligand_gas_prmtop),
         "--trajectory", str(combined_traj),

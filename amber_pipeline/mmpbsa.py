@@ -15,6 +15,7 @@ from pathlib import Path
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument("--complex-prmtop", required=True, type=Path)
+    p.add_argument("--complex-solvated-prmtop", required=True, type=Path)
     p.add_argument("--receptor-prmtop", required=True, type=Path)
     p.add_argument("--ligand-prmtop", required=True, type=Path)
     p.add_argument("--trajectory", required=True, type=Path)
@@ -149,7 +150,7 @@ def main():
     results = {}
     for name, (prmtop, mask) in systems.items():
         stripped_traj = args.outdir / f"{name}_stripped.nc"
-        strip_trajectory(args.cpptraj, args.complex_prmtop, args.trajectory,
+        strip_trajectory(args.cpptraj, args.complex_solvated_prmtop, args.trajectory,
                           mask, start, stop, interval, stripped_traj, args.outdir)
 
         mdin = write_sander_gb_input(igb, saltcon, args.outdir / f"{name}_gb.in")
