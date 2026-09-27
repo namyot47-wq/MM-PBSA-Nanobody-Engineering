@@ -102,17 +102,24 @@ quit
 
 
 def get_chain_residue_ranges(pdb_path: Path) -> dict[str, tuple[int, int]]:
-    """Return {chain_id: (first_resnum, last_resnum)} from the PDB's own numbering.
-    Assumes tleap preserves this numbering contiguously in the output prmtop."""
+    """Return {chain_id: (first_resnum, last_resnum)} using SEQUENTIAL position
+    across the whole structure (1-indexed), matching tleap's renumbering —
+    not the PDB file's own (possibly per-chain, possibly restarting) numbering."""
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure("complex", str(pdb_path))
     ranges = {}
+    idx = 0
     for chain in structure[0]:
-        resnums = [res.id[1] for res in chain if res.id[0] == " "]
-        if resnums:
-            ranges[chain.id] = (min(resnums), max(resnums))
+        start = None
+        for res in chain:
+            if res.id[0] != " ":
+                continue
+            idx += 1
+            if start is None:
+                start = idx
+        if start is not None:
+            ranges[chain.id] = (start, idx)
     return ranges
-
 
 def chain_mask_from_ranges(ranges: dict[str, tuple[int, int]], chain_id: str) -> str:
     """Build an Amber residue mask (e.g. ':1-250') for a given chain."""
