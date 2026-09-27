@@ -109,10 +109,6 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     if not prod_segments:
         sys.exit(f"[mmpbsa] no prod_*.mdcrd files found in {prod_dir} — run --step production first")
 
-<<<<<<< HEAD
-    # 1. Concatenate all production segments into one trajectory
-    solvated_prmtop = prep_dir / "protein_complex_solvated.prmtop"
-=======
     # 1. Re-derive receptor/ligand masks the same way run_prep did
     clean_pdb = prep_dir / "protein_complex_clean.pdb"
     ranges = prep.get_chain_residue_ranges(clean_pdb)
@@ -120,7 +116,6 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     ligand_mask = prep.chain_mask_from_ranges(ranges, cfg["ligand_chain"])
     
     # 2. Concatenate all production segments into one trajectory
->>>>>>> 13d5684a9da28b6edc23e5cb31d5cc6b5ca8f150
     combined_traj = mmpbsa_dir / "production_full.nc"
     cat_script = mmpbsa_dir / "concat.cpptraj"
     cat_script.write_text(
