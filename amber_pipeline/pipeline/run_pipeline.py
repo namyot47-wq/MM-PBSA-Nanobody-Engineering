@@ -137,7 +137,7 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
     #     since mmpbsa.py's configparser.getint() cannot accept "last".
     import re as _re
     frame_count_result = subprocess.run(
-        ["cpptraj", "-p", str(solvated_prmtop), "-y", str(combined_traj), "-tl"],
+        ["cpptraj", "-p", str(complex_gas_prmtop), "-y", str(combined_traj), "-tl"],
         capture_output=True, text=True,
     )
     _m = _re.search(r"Frames:\s*(\d+)", frame_count_result.stdout)

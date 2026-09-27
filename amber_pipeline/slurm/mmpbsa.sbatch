@@ -7,9 +7,16 @@
 #SBATCH -o slurm_logs/mmpbsa_%j.out
 #SBATCH -e slurm_logs/mmpbsa_%j.err
 
+set -euo pipefail
+
+mkdir -p /scratch/namyot/BartelleLab/MM-PBSA-Nanobody-Engineering/amber_pipeline/slurm_logs
+
 module load mamba/latest
 module load amber/24
 source activate amber_pipeline
+
+which cpptraj
+which sander
 
 cd /scratch/namyot/BartelleLab/MM-PBSA-Nanobody-Engineering/amber_pipeline
 python -m pipeline.run_pipeline config.yaml --step mmpbsa
