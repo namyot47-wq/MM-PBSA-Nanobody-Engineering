@@ -77,8 +77,8 @@ def write_sander_gb_input(igb, saltcon, path):
         "Single-point GB energy for each frame of a trajectory\n"
         "&cntrl\n"
         " imin=5, ntx=1, irest=0,\n"
-        f" igb={igb}, saltcon={saltcon},\n"
-        " ntb=0, cut=999.0,\n"
+        f" igb={igb}, saltcon={saltcon},gbsa=1, \n"
+        " ntb=0, cut=999.0, ntpr=1, \n"
         "/\n"
     )
     return path
@@ -99,7 +99,7 @@ def run_sander_energy(sander_bin, prmtop, inpcrd, stripped_traj, mdin, mdout, wo
 # --- frontend: parse + aggregate ----------------------------------------
 
 ENERGY_TERMS = ("VDWAALS", "EEL", "EGB", "ESURF")
-_TERM_RE = {t: re.compile(rf"\b{t}\s*=\s*(-?\d+\.\d+)") for t in ENERGY_TERMS}
+_TERM_RE = {t: re.compile(rf"(?<!1-4 )\b{t}\s*=\s*(-?\d+\.\d+)") for t in ENERGY_TERMS}
 
 
 def parse_mdout(mdout_path: Path):
@@ -139,7 +139,7 @@ def main():
     interval = cfg.getint("general", "interval")
     igb = cfg.get("gb", "igb")
     saltcon = cfg.get("gb", "saltcon")
-    complex_mask = cfg.get("general", "complex_mask", fallback="!(:WAT,Na+,Cl-,K+)")
+    complex_mask = cfg.get("general", "complex_mask", fallback=":*")
 
     systems = {
         "complex": (args.complex_prmtop, complex_mask),
