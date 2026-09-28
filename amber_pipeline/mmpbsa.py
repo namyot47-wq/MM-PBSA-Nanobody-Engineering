@@ -84,12 +84,12 @@ def write_sander_gb_input(igb, saltcon, path):
     return path
 
 
-def run_sander_energy(sander_bin, prmtop, stripped_traj, mdin, mdout, workdir):
+def run_sander_energy(sander_bin, prmtop, inpcrd, stripped_traj, mdin, mdout, workdir):
     run([
         sander_bin, "-O",
         "-i", str(mdin),
         "-p", str(prmtop),
-        "-c", str(stripped_traj),
+        "-c", str(inpcrd),
         "-y", str(stripped_traj),
         "-o", str(mdout),
     ], cwd=workdir)
@@ -154,8 +154,9 @@ def main():
                           mask, start, stop, interval, stripped_traj, args.outdir)
 
         mdin = write_sander_gb_input(igb, saltcon, args.outdir / f"{name}_gb.in")
-        mdout = run_sander_energy(args.sander, prmtop, stripped_traj, mdin,
-                                   args.outdir / f"{name}.mdout", args.outdir)
+        mdout = run_sander_energy(args.sander, prmtop, Path(prmtop).with_suffix(".inpcrd"),
+                          stripped_traj, mdin,
+                          args.outdir / f"{name}.mdout", args.outdir)
 
         values, n_frames = parse_mdout(mdout)
         results[name] = summarize(values)
