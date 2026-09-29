@@ -79,7 +79,8 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
     stride = max(1, total_frames // n_frames)
 
     avg_pdb = workdir / f"{label}_qh_avg.pdb"
-    entropy_out = workdir / f"{label}_qh_entropy.dat"
+    entropy_out = workdir / f"{label}_qh_evecs.dat"
+    thermo_out = workdir / f"{label}_qh_thermo.dat"
     script = workdir / f"qh_{label}.cpptraj"
     script.write_text(
         f"parm {prmtop}\n"
@@ -93,13 +94,13 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
         f"strip !({mask})\n"
         f"rms ref [avgref] :* mass\n"
         f"matrix mwcovar name mwc :*\n"
-        f"diagmatrix mwc out {entropy_out} vecs 0 name qhvec "
-        f"entropy temp {temp}\n"
+        f"diagmatrix mwc out {entropy_out} name qhvec vecs {n_frames} "
+        f"thermo outthermo {thermo_out} temp {temp}\n"
         f"run\n"
     )
     run([cpptraj_bin, "-i", str(script)], cwd=workdir)
 
-    text = entropy_out.read_text()
+    text = thermo_out.read_text()
     m = re.search(r"Total\s+Entropy.*?=\s*(-?\d+\.\d+)\s*cal/mol-K", text, re.IGNORECASE)
     if not m:
         raise RuntimeError(f"[{label}] could not parse entropy from {entropy_out}")
