@@ -87,8 +87,10 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
         f"rms first :* mass\n"
         f"average {avg_pdb}\n"
         f"run\n"
+        f"reference {avg_pdb} [avgref]\n"
         f"trajin {trajectory} {start} {stop} {stride}\n"
         f"strip !({mask})\n"
+        f"rms ref [avgref] :* mass\n"
         f"rms first ref {avg_pdb} :* mass\n"
         f"matrix mwcovar name mwc :*\n"
         f"diagmatrix mwc out {entropy_out} vecs 0 name qhvec "
@@ -223,7 +225,7 @@ def main():
     minusTdS_bind = entropies["complex"] - entropies["receptor"] - entropies["ligand"]
     dG_bind_with_entropy = dH_bind + minusTdS_bind
 
-    
+
     report_path = args.outdir / "FINAL_RESULTS_simple_mmpbsa.dat"
     with open(report_path, "w") as f:
         f.write("Single-trajectory MM-GBSA results\n")
