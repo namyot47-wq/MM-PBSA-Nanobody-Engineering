@@ -16,11 +16,13 @@ module load amber/24
 
 source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate amber_pipeline
+export PATH="/home/namyot/.conda/envs/amber_pipeline/bin:$PATH"
+unset PYTHONPATH
 
 echo "CONDA_DEFAULT_ENV=$CONDA_DEFAULT_ENV"
 which python3
 python3 -c "import sys; print(sys.executable)"
-python3 -c "import yaml; print('yaml OK:', yaml.__file__)"
+python3 -c "import yaml; print('yaml OK')"
 which cpptraj
 which sander
 
