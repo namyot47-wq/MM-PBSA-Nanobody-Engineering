@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # dG_bind = <G_complex> - <G_receptor> - <G_ligand>, single-trajectory MM-GBSA.
 # Requires AmberTools (cpptraj, sander) on PATH.
-
+import yaml
 import argparse
 import configparser
 import re
@@ -10,6 +10,7 @@ import statistics
 import subprocess
 import sys
 from pathlib import Path
+
 
 
 def parse_args():
