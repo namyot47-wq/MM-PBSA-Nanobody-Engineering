@@ -90,6 +90,7 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
         f"average {avg_pdb}\n"
         f"run\n"
         f"reference {avg_pdb} [avgref]\n"
+        f"clear trajin\n"
         f"trajin {trajectory} {start} {stop} {stride}\n"
         f"strip !({mask})\n"
         f"rms ref [avgref] :* mass\n"
