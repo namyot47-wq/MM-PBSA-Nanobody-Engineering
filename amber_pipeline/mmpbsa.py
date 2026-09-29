@@ -92,7 +92,6 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
         f"trajin {trajectory} {start} {stop} {stride}\n"
         f"strip !({mask})\n"
         f"rms ref [avgref] :* mass\n"
-        f"rms first ref {avg_pdb} :* mass\n"
         f"matrix mwcovar name mwc :*\n"
         f"diagmatrix mwc out {entropy_out} vecs 0 name qhvec "
         f"entropy temp {temp}\n"
