@@ -50,6 +50,6 @@ mmpbsa:
   start_frame: 1
   end_frame: last
   interval: 1
-  igb: 5
+  igb: 8                  #GB model for protein-protein interactions
   saltcon: 0.15
-  
+  entropy_n_frames: 20 #Number of frames sampled for entropy calcualtions

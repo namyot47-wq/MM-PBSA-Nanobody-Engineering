@@ -33,6 +33,7 @@ def run_prep(cfg, prep_dir):
         f"source {cfg['forcefield']}\n"
         f"source {water_rc}\n\n"
         f"com = loadpdb {clean_pdb.name}\n"
+        f"set default PBRadii mbondi3\n"
         + prep.build_neutralized_solvated_script(charge, cfg["water_box"], cfg["box_padding_ang"])
         + "quit\n"
     )
@@ -159,9 +160,10 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
         "start_frame": str(mm.get("start_frame", 1)),
         "end_frame": str(end_frame),
         "interval": str(mm.get("interval", 1)),
+        "entropy_n_frames": str(mm.get("entropy_n_frames", 20)),
     }
     ini["gb"] = {
-        "igb": str(mm.get("igb", 5)),
+        "igb": str(mm.get("igb", 8)),
         "saltcon": str(mm.get("saltcon", 0.15)),
     }
     ini_path = mmpbsa_dir / "mmpbsa.ini"

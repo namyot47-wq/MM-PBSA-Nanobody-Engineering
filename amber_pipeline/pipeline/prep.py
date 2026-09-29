@@ -25,7 +25,7 @@ source leaprc.water.{water_model}
 
 com = loadpdb {complex_pdb}
 
-set default PBRadii mbondi2
+set default PBRadii mbondi3
 
 saveamberparm com protein_complex_gas.prmtop protein_complex_gas.inpcrd
 
@@ -92,7 +92,7 @@ source {cfg["forcefield"]}
 source leaprc.water.{cfg["water_model"]}
 
 com = loadpdb {clean_pdb}
-set default PBRadii mbondi2
+set default PBRadii mbondi3
 {solvate_block}
 quit
 """)

@@ -69,6 +69,41 @@ def strip_trajectory(cpptraj_bin, complex_prmtop, trajectory,
     run([cpptraj_bin, "-i", str(script)], cwd=workdir)
     return out_traj
 
+def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
+                            n_frames, temp, workdir, label):
+    """Compute -TdS (kcal/mol) via mass-weighted covariance / quasi-harmonic
+    analysis on a strided subset of frames. Returns -TdS (positive = entropy
+    cost of binding, subtracted from dH in the final dG)."""
+    total_frames = stop - start + 1
+    stride = max(1, total_frames // n_frames)
+
+    avg_pdb = workdir / f"{label}_qh_avg.pdb"
+    entropy_out = workdir / f"{label}_qh_entropy.dat"
+    script = workdir / f"qh_{label}.cpptraj"
+    script.write_text(
+        f"parm {prmtop}\n"
+        f"trajin {trajectory} {start} {stop} {stride}\n"
+        f"strip !({mask})\n"
+        f"rms first :* mass\n"
+        f"average {avg_pdb}\n"
+        f"run\n"
+        f"trajin {trajectory} {start} {stop} {stride}\n"
+        f"strip !({mask})\n"
+        f"rms first ref {avg_pdb} :* mass\n"
+        f"matrix mwcovar name mwc :*\n"
+        f"diagmatrix mwc out {entropy_out} vecs 0 name qhvec "
+        f"entropy temp {temp}\n"
+        f"run\n"
+    )
+    run([cpptraj_bin, "-i", str(script)], cwd=workdir)
+
+    text = entropy_out.read_text()
+    m = re.search(r"Total\s+Entropy.*?=\s*(-?\d+\.\d+)\s*cal/mol-K", text, re.IGNORECASE)
+    if not m:
+        raise RuntimeError(f"[{label}] could not parse entropy from {entropy_out}")
+    S_cal_mol_K = float(m.group(1))
+    minusTdS_kcal = -(temp * S_cal_mol_K) / 1000.0
+    return minusTdS_kcal
 
 # --- backend: sander ----------------------------------------------------
 
@@ -148,6 +183,10 @@ def main():
     }
 
     results = {}
+    entropies = {}
+    entropy_n_frames = cfg.getint("general", "entropy_n_frames", fallback=20)
+    temp = 300.0
+
     for name, (prmtop, mask) in systems.items():
         stripped_traj = args.outdir / f"{name}_stripped.nc"
         strip_trajectory(args.cpptraj, args.complex_prmtop, args.trajectory,
@@ -162,6 +201,12 @@ def main():
         results[name] = summarize(values)
         print(f"[{name}] parsed {n_frames} frames")
 
+        entropies[name] = quasi_harmonic_entropy(
+            args.cpptraj, args.complex_prmtop, args.trajectory, mask,
+            start, stop, entropy_n_frames, temp, args.outdir, name,
+        )
+        print(f"[{name}] -TdS = {entropies[name]:.4f} kcal/mol")
+
     dG_series = [
         c - r - l for c, r, l in zip(
             results["complex"]["TOTAL"]["series"],
@@ -172,10 +217,16 @@ def main():
     dG_mean = statistics.mean(dG_series)
     dG_sd = statistics.stdev(dG_series) if len(dG_series) > 1 else 0.0
     dG_sem = dG_sd / (len(dG_series) ** 0.5) if dG_series else 0.0
+    dH_bind = (results["complex"]["TOTAL"]["mean"]
+               - results["receptor"]["TOTAL"]["mean"]
+               - results["ligand"]["TOTAL"]["mean"])
+    minusTdS_bind = entropies["complex"] - entropies["receptor"] - entropies["ligand"]
+    dG_bind_with_entropy = dH_bind + minusTdS_bind
 
+    
     report_path = args.outdir / "FINAL_RESULTS_simple_mmpbsa.dat"
     with open(report_path, "w") as f:
-        f.write("Simple single-trajectory MM-GBSA results (no entropy term)\n")
+        f.write("Single-trajectory MM-GBSA results\n")
         f.write("All units kcal/mol.\n\n")
         for name in ("complex", "receptor", "ligand"):
             f.write(f"{name.upper()}:\n")
@@ -186,7 +237,9 @@ def main():
             f.write("\n")
         f.write(f"DELTA G binding = {dG_mean:.4f} +/- {dG_sd:.4f} "
                 f"(sem {dG_sem:.4f}) kcal/mol\n")
-
+        f.write(f"\ndH (enthalpy only, no entropy) = {dG_mean:.4f} +/- {dG_sd:.4f} kcal/mol\n")
+        f.write(f"-TdS (quasi-harmonic, binding) = {minusTdS_bind:.4f} kcal/mol\n")
+        f.write(f"dG (with entropy) = {dG_bind_with_entropy:.4f} kcal/mol\n")
     print(f"\nWrote {report_path}")
     print(f"DELTA G binding = {dG_mean:.4f} +/- {dG_sd:.4f} kcal/mol (sem {dG_sem:.4f})")
 
