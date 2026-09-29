@@ -13,8 +13,14 @@ mkdir -p /scratch/namyot/BartelleLab/MM-PBSA-Nanobody-Engineering/amber_pipeline
 
 module load mamba/latest
 module load amber/24
-source activate amber_pipeline
 
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate amber_pipeline
+
+echo "CONDA_DEFAULT_ENV=$CONDA_DEFAULT_ENV"
+which python3
+python3 -c "import sys; print(sys.executable)"
+python3 -c "import yaml; print('yaml OK:', yaml.__file__)"
 which cpptraj
 which sander
 
