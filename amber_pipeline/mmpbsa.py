@@ -102,10 +102,14 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
     run([cpptraj_bin, "-i", str(script)], cwd=workdir)
 
     text = thermo_out.read_text()
-    m = re.search(r"Total\s+Entropy.*?=\s*(-?\d+\.\d+)\s*cal/mol-K", text, re.IGNORECASE)
+    m = re.search(
+    r"^\s*Total\s+(?:-?\d+\.\d+|-?nan)\s+(?:-?\d+\.\d+|-?nan)\s+(-?\d+\.\d+)\s*$",
+    text, re.IGNORECASE | re.MULTILINE
+    )
     if not m:
-        raise RuntimeError(f"[{label}] could not parse entropy from {entropy_out}")
+        raise RuntimeError(f"[{label}] could not parse entropy from {thermo_out}")
     S_cal_mol_K = float(m.group(1))
+    
     minusTdS_kcal = -(temp * S_cal_mol_K) / 1000.0
     return minusTdS_kcal
 
