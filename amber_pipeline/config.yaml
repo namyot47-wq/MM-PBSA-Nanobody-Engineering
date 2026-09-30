@@ -51,4 +51,4 @@ mmpbsa:
   end_frame: 3000
   igb: 8                  #GB model for protein-protein interactions
   saltcon: 0.15
-  entropy_n_frames: 5 #Number of frames sampled for entropy calcualtions
+  entropy_n_frames: 1 #Number of frames sampled for entropy calcualtions
