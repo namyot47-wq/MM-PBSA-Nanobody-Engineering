@@ -48,7 +48,7 @@ slurm_gpu_type: "a100"
 
 mmpbsa:
   start_frame: 1
-  end_frame: 4000
+  end_frame: 2000
   igb: 8                  #GB model for protein-protein interactions
   saltcon: 0.15
   entropy_n_frames: 35 #Number of frames sampled for entropy calcualtions

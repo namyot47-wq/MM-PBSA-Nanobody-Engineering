@@ -89,7 +89,8 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
         f"rms first :* mass\n"
         f"average {avg_pdb}\n"
         f"run\n"
-        f"reference {avg_pdb} [avgref]\n"
+        f"parm {avg_pdb} [avgparm]\n"
+        f"reference {avg_pdb} [avgref] parm [avgparm]\n"
         f"clear trajin\n"
         f"trajin {trajectory} {start} {stop} {stride}\n"
         f"strip !({mask})\n"
@@ -109,7 +110,6 @@ def quasi_harmonic_entropy(cpptraj_bin, prmtop, trajectory, mask, start, stop,
     if not m:
         raise RuntimeError(f"[{label}] could not parse entropy from {thermo_out}")
     S_cal_mol_K = float(m.group(1))
-    
     minusTdS_kcal = -(temp * S_cal_mol_K) / 1000.0
     return minusTdS_kcal
 
