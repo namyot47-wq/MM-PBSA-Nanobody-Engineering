@@ -1,5 +1,5 @@
 # config.yaml
-run_id: run_nb_105201
+run_id: run_nb_123291
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
@@ -48,7 +48,7 @@ slurm_gpu_type: "a100"
 
 mmpbsa:
   start_frame: 1
-  end_frame: 2500
+  end_frame: 3000
   igb: 8                  #GB model for protein-protein interactions
   saltcon: 0.15
   entropy_n_frames: 500 #Number of frames sampled for entropy calcualtions
