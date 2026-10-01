@@ -160,7 +160,6 @@ def run_mmpbsa(cfg, prep_dir, prod_dir, mmpbsa_dir):
         "start_frame": str(mm.get("start_frame", 1)),
         "end_frame": str(end_frame),
         "interval": str(mm.get("interval", 1)),
-        "entropy_n_frames": str(mm.get("entropy_n_frames", 20)),
     }
     ini["gb"] = {
         "igb": str(mm.get("igb", 8)),
