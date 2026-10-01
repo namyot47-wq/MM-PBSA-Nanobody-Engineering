@@ -12,7 +12,7 @@ set -eo pipefail
 
 module load mamba/latest
 source activate amber_pipeline
-module load amber/24        # load last so its bin/ comes first on PATH
+module load amber/24        
 unset PYTHONPATH
 
 echo "CONDA_DEFAULT_ENV=$CONDA_DEFAULT_ENV"
