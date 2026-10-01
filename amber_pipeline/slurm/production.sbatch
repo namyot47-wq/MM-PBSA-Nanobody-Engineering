@@ -8,7 +8,7 @@
 #SBATCH -o slurm_logs/prod_%j.out
 #SBATCH -e slurm_logs/prod_%j.err
 
-sset -euo pipefail
+set -euo pipefail
 
 mkdir -p /scratch/namyot/BartelleLab/MM-PBSA-Nanobody-Engineering/amber_pipeline/slurm_logs
 
