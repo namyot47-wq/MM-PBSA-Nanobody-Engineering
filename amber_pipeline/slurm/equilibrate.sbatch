@@ -13,6 +13,7 @@ set -eo pipefail
 module load mamba/latest
 module load amber/24
 source activate amber_pipeline
+export PATH="/home/namyot/.conda/envs/amber_pipeline/bin:$PATH"
 unset PYTHONPATH
 
 echo "CONDA_DEFAULT_ENV=$CONDA_DEFAULT_ENV"
