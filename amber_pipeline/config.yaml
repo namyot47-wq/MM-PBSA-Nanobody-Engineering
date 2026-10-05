@@ -1,5 +1,5 @@
 # config.yaml
-run_id: run_nb_213187
+run_id: run_nb_224845
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
