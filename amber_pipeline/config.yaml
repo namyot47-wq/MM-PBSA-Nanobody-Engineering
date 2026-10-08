@@ -1,5 +1,5 @@
 # config.yaml
-run_id: run_nb_105201
+run_id: ilion_run_0003_design_9
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
