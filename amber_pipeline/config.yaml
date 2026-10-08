@@ -7,8 +7,8 @@ strip_hetero: true
 strip_waters: true
 keep_residues: [] #Prevents the stripping of specified residues 
 #Splitting the protein_complex into chain A and B
-receptor_chain: B 
-ligand_chain: A #nanobody
+receptor_chain: A #recptor 
+ligand_chain: B #nanobody
 
 #Forcefield:
 forcefield: leaprc.protein.ff14SB
