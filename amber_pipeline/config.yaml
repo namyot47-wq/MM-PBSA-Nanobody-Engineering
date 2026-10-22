@@ -1,5 +1,5 @@
 # config.yaml
-run_id: run_fold_ngs_replicate_6_number_8_and_fc_receptor_fcgr2a_model_0
+run_id: run_fold_ngs_replicate_2_number_1_and_fc_receptor_fcgr2a_model_0
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
