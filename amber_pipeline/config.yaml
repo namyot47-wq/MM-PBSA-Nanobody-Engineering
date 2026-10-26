@@ -1,5 +1,5 @@
 # config.yaml
-run_id: run_fold_ngs_replicate_2_number_1_and_fc_receptor_fcgr2a_model_0
+run_id: fold_fcrgamma_and_fc_receptor_fcgr21b_aai46679_1_model_0
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
@@ -22,7 +22,7 @@ heat1_steps: 25000
 target_temp: 300.0
 heat2_taup: 1.0
 heat3_taup: 2.0
-equil_ps: 18000 #Equilibrium time constraint
+equil_ps: 19000 #Equilibrium time constraint
 
 #Production
 production_ns: 10 #run-time parameter 
