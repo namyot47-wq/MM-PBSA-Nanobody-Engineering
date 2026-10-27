@@ -3,7 +3,7 @@
 #SBATCH -q public
 #SBATCH -G a100:1
 #SBATCH -c 4
-#SBATCH -t 0-4
+#SBATCH -t 0-6
 #SBATCH -J nb_equil
 #SBATCH -o slurm_logs/equil_%j.out
 #SBATCH -e slurm_logs/equil_%j.err
