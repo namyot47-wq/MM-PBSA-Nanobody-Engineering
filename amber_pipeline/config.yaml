@@ -1,5 +1,5 @@
 # config.yaml
-run_id: fold_fcrgamma_and_fc_receptor_fcgr21b_aai46679_1_model_0
+run_id: fold_fcrgamma_and_fc_receptor_fcgr2a_model_0
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
