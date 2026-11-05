@@ -1,5 +1,5 @@
 # config.yaml
-run_id: fold_il20_and_lp9
+run_id: fold_abcg2_nb17
 input_pdb: inputs/protein_complex.pdb
 
 #Strip any non-protein resdiues
